@@ -1,0 +1,4 @@
+hardware config
+disk disign
+disk integrity check 
+disk mount
