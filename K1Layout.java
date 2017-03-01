@@ -57,4 +57,9 @@ public class K1Layout extends JFrame implements ActionListener {
    public boolean getResult() {
       return true;
    } // end getResult
+   
+   public boolean getBoolean() {
+       return false;
+   }
+
 } // end class
