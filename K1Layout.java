@@ -3,13 +3,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent; 
 import javax.swing.JFrame;
 import javax.swing.JButton;
-import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 public class K1Layout extends JFrame implements ActionListener {
 
    private JButton[] buttons;
-   private JTextArea jTextAreaCenter;
-   private JTextArea jTextAreaSouth;
+   private JTextField jTextFieldCenter;
+   private JTextField jTextFieldSouth;
 
    private static final String[] names = {"Knowledge", "Result", "Stats", "Answer", "Question" };
    private BorderLayout layout;
@@ -32,19 +32,22 @@ public class K1Layout extends JFrame implements ActionListener {
        }
 
        reader.openFile();
-       jTextAreaCenter = new JTextArea();
-       jTextAreaCenter.append(question);
-       jTextAreaSouth = new JTextArea();
+       jTextFieldCenter = new JTextField();
+       jTextFieldCenter.setText(question);
+       jTextFieldSouth = new JTextField();
 
       add(buttons[0], BorderLayout.NORTH);
-      add(jTextAreaSouth, BorderLayout.SOUTH);
+      add(jTextFieldSouth, BorderLayout.SOUTH);
       add(buttons[2], BorderLayout.EAST);
       add(buttons[3], BorderLayout.WEST);
-      add(jTextAreaCenter, BorderLayout.CENTER);
+      add(jTextFieldCenter, BorderLayout.CENTER);
 
    }
    
    public void actionPerformed(ActionEvent event) {
+      if (event.getSource() == jTextFieldSouth) {
+          System.out.println(jTextFieldSouth.getText());
+      }
       for (JButton button : buttons) {
           if (event.getSource() == button) 
             //button.setVisible(false); 
