@@ -35,6 +35,7 @@ public class K1Layout extends JFrame implements ActionListener {
        jTextFieldCenter = new JTextField();
        jTextFieldCenter.setText(question);
        jTextFieldSouth = new JTextField();
+       jTextFieldSouth.addActionListener(this);
 
       add(buttons[0], BorderLayout.NORTH);
       add(jTextFieldSouth, BorderLayout.SOUTH);
@@ -48,6 +49,9 @@ public class K1Layout extends JFrame implements ActionListener {
       if (event.getSource() == jTextFieldSouth) {
           System.out.println(jTextFieldSouth.getText());
       }
+      String text = jTextFieldSouth.getText();
+      jTextFieldSouth.selectAll();
+      System.out.println(text);
       for (JButton button : buttons) {
           if (event.getSource() == button) 
             //button.setVisible(false); 
