@@ -1,4 +1,7 @@
-hardware config
-disk disign
-disk integrity check 
-disk mount
+The three main types of options of the ps command --- Unix98 Options - BSD Options - GNU Long Options
+Determine and configure Hardware settings --- bravo
+Design hard disk layout --- bravo
+Create partitions and filesystems --- bravo
+Maintain teh integrity of filesystems --- bravo 
+Control mounting and unmounting of filesystems --- bravo
+

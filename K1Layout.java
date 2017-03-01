@@ -12,14 +12,14 @@ public class K1Layout extends JFrame implements ActionListener {
 
    private static final String[] names = {"Knowledge", "Result", "Stats", "Answer", "Question" };
    private BorderLayout layout;
-   Reader reader;
+   K1Reader reader;
 
-   public K1Layout() {
+   public K1Layout(String question) {
 
        super ("Border Layout Demo");
 
        layout = new BorderLayout (5,5);
-       reader = new Reader();
+       reader = new K1Reader();
 
        setLayout(layout);
 
@@ -32,7 +32,7 @@ public class K1Layout extends JFrame implements ActionListener {
 
        reader.openFile();
        jTextArea = new JTextArea();
-       jTextArea.append(reader.readRecordsString());
+       jTextArea.append(question);
 
       add(buttons[0], BorderLayout.NORTH);
       add(buttons[1], BorderLayout.SOUTH);

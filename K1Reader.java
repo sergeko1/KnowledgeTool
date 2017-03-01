@@ -1,11 +1,9 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.lang.IllegalStateException;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.ArrayList;
 
-
-public class Reader {
+public class K1Reader {
 
    private Scanner input;
 
@@ -25,14 +23,16 @@ public class Reader {
       }
    }
 
-   public String readRecordsString() {
-      String string = new String();
-      while (input.hasNext()) {
-        string = string + " " +  input.next();
+   public ArrayList<String> readRecordsToArrayList() {
+//      String string = new String();
+      //input.useDelimiter("//");
+      ArrayList<String> lines = new ArrayList<String>();
+      while (input.hasNextLine()) {
+        //string = string + " " +  input.next();
+        lines.add(input.nextLine());
       }
-      return string;
-   }
-
+      return lines;
+   } 
 
    public void print() {
       System.out.println("record");
