@@ -17,6 +17,7 @@ public class K1Main {
       K1Layout borderLayoutFrame = new K1Layout(question.getQuestion());
       borderLayoutFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       borderLayoutFrame.setSize(600,400);
+      borderLayoutFrame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
       borderLayoutFrame.setVisible(true);
 
       // ITERATE THROUGH QUESTIONS

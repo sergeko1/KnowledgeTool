@@ -8,7 +8,8 @@ import javax.swing.JTextArea;
 public class K1Layout extends JFrame implements ActionListener {
 
    private JButton[] buttons;
-   private JTextArea jTextArea;
+   private JTextArea jTextAreaCenter;
+   private JTextArea jTextAreaSouth;
 
    private static final String[] names = {"Knowledge", "Result", "Stats", "Answer", "Question" };
    private BorderLayout layout;
@@ -31,14 +32,15 @@ public class K1Layout extends JFrame implements ActionListener {
        }
 
        reader.openFile();
-       jTextArea = new JTextArea();
-       jTextArea.append(question);
+       jTextAreaCenter = new JTextArea();
+       jTextAreaCenter.append(question);
+       jTextAreaSouth = new JTextArea();
 
       add(buttons[0], BorderLayout.NORTH);
-      add(buttons[1], BorderLayout.SOUTH);
+      add(jTextAreaSouth, BorderLayout.SOUTH);
       add(buttons[2], BorderLayout.EAST);
       add(buttons[3], BorderLayout.WEST);
-      add(jTextArea, BorderLayout.CENTER);
+      add(jTextAreaCenter, BorderLayout.CENTER);
 
    }
    
