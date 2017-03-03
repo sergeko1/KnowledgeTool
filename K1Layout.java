@@ -13,11 +13,15 @@ public class K1Layout extends JFrame implements ActionListener {
 
    private static final String[] names = {"Knowledge", "Result", "Stats", "Answer", "Question" };
    private BorderLayout layout;
+   private String answer;
    K1Reader reader;
+   K1Iterator iterator ;
 
-   public K1Layout(String question) {
 
-       super ("Border Layout Demo");
+   public K1Layout(K1Iterator myIterator) {
+
+       super ("Knowledge tool");
+       iterator = myIterator;
 
        layout = new BorderLayout (5,5);
        reader = new K1Reader();
@@ -33,7 +37,7 @@ public class K1Layout extends JFrame implements ActionListener {
 
        reader.openFile();
        jTextFieldCenter = new JTextField();
-       jTextFieldCenter.setText(question);
+       jTextFieldCenter.setText(iterator.getQuestion());
        jTextFieldSouth = new JTextField();
        jTextFieldSouth.addActionListener(this);
 
@@ -45,13 +49,17 @@ public class K1Layout extends JFrame implements ActionListener {
 
    }
    
+
    public void actionPerformed(ActionEvent event) {
       if (event.getSource() == jTextFieldSouth) {
           System.out.println(jTextFieldSouth.getText());
+          answer = jTextFieldSouth.getText().trim();      
+          iterator.next();
+          jTextFieldCenter.setText(iterator.getQuestion());
+          this.invalidate();
+          this.validate();
+          this.repaint();
       }
-      String text = jTextFieldSouth.getText();
-      jTextFieldSouth.selectAll();
-      System.out.println(text);
       for (JButton button : buttons) {
           if (event.getSource() == button) 
             //button.setVisible(false); 
@@ -62,6 +70,10 @@ public class K1Layout extends JFrame implements ActionListener {
       layout.layoutContainer(getContentPane());
    } // end method actionPerformed
 
+
+   public String getAnswer() {
+       return answer;
+   }
 
    public boolean getResult() {
       return true;

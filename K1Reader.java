@@ -24,11 +24,8 @@ public class K1Reader {
    }
 
    public ArrayList<String> readRecordsToArrayList() {
-//      String string = new String();
-      //input.useDelimiter("//");
       ArrayList<String> lines = new ArrayList<String>();
       while (input.hasNextLine()) {
-        //string = string + " " +  input.next();
         lines.add(input.nextLine());
       }
       return lines;

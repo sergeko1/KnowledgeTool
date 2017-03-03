@@ -10,22 +10,14 @@ public class K1Main {
       ArrayList<String> list = reader.readRecordsToArrayList();
 
       // GETS THE FIRST QUESTION
-      K1Question question;
-      question = new K1Question(list.get(0));
+      K1Iterator iterator = new K1Iterator(list);
 
       // CREATES A FRAME WITH THE FIRST QUESTION
-      K1Layout borderLayoutFrame = new K1Layout(question.getQuestion());
+      K1Layout borderLayoutFrame = new K1Layout(iterator);
       borderLayoutFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       borderLayoutFrame.setSize(600,400);
       borderLayoutFrame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
       borderLayoutFrame.setVisible(true);
 
-      // ITERATE THROUGH QUESTIONS
-      for (int i=0; i<list.size(); i++) {
-         System.out.println(list.get(i));
-      //   question = new K1Question(list.get(i));
-      } // for end
-
    } // main end
-
-}
+}// Class end
