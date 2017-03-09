@@ -9,7 +9,7 @@ public class K1Main {
       reader.openFile();
       ArrayList<String> list = reader.readRecordsToArrayList();
 
-      // GETS THE FIRST QUESTION
+      // Instance to get the interactions 
       K1Iterator iterator = new K1Iterator(list);
 
       // CREATES A FRAME WITH THE FIRST QUESTION

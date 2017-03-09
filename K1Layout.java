@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import java.awt.Font;
 
 public class K1Layout extends JFrame implements ActionListener {
 
@@ -38,6 +39,7 @@ public class K1Layout extends JFrame implements ActionListener {
        reader.openFile();
        jTextFieldCenter = new JTextField();
        jTextFieldCenter.setText(iterator.getQuestion());
+       jTextFieldCenter.setFont(new Font("Courier", Font.BOLD,12));
        jTextFieldSouth = new JTextField();
        jTextFieldSouth.addActionListener(this);
 
@@ -60,6 +62,7 @@ public class K1Layout extends JFrame implements ActionListener {
           this.validate();
           this.repaint();
       }
+
       for (JButton button : buttons) {
           if (event.getSource() == button) 
             //button.setVisible(false); 
