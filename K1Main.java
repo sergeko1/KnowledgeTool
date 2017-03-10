@@ -13,11 +13,11 @@ public class K1Main {
       K1Iterator iterator = new K1Iterator(list);
 
       // CREATES A FRAME WITH THE FIRST QUESTION
-      K1Layout borderLayoutFrame = new K1Layout(iterator);
-      borderLayoutFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      borderLayoutFrame.setSize(600,400);
-      borderLayoutFrame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
-      borderLayoutFrame.setVisible(true);
+      K1JFrame k1JFrame = new K1JFrame(iterator);
+      k1JFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      k1JFrame.setSize(600,400);
+      k1JFrame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+      k1JFrame.setVisible(true);
 
    } // main end
 }// Class end

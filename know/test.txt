@@ -1,7 +1,96 @@
-The three main types of options of the ps command --- Unix98 Options - BSD Options - GNU Long Options
-Determine and configure Hardware settings --- bravo
-Design hard disk layout --- bravo
-Create partitions and filesystems --- bravo
-Maintain teh integrity of filesystems --- bravo 
-Control mounting and unmounting of filesystems --- bravo
-
+- /usr holds most linux programms --- ok --- OK
+- /usr/local hold programs and data files that are unique to this installation --- ok  --- OK
+- /var holds miscellaneus files associated with the day-to-day functioning of a computer. --- ok --- OK
+- LPI = Linux professional institute.  --- OK
+- LPIC-1 is an introductory Linux certification. --- OK
+- The LPIC-1 certification consists of two exams 101-400 and 102-400. --- OK
+- Linux is a clone of the Unix Operating System.  --- OK
+- Linux consists of a kernel, which is the control software and many libraries and utilities that rely on the kernel to provide features with which users interact.  --- OK
+- The four major benefits of the LPIC certification are: relevance, quality, neutrality and support. --- OK
+- A shell is a program that accepts and interprets text-mode commands from the user and provide an interface to the system. --- OK
+- An environment variable is a place holder for data that may be useful to many programs.  --- OK
+- Default interactive shell: is the shell program a user uses to enter commands, run programs from command line, run shell scripts. --- OK
+- Default system shell: is used by the Linux system to run system shell scripts, typically at startup. --- OK
+- Internal commands: command bilt into the shell. (also called built-in commands). --- OK
+- time: provides the time the subsequent commands take execute.  --- OK
+- $PATH : enviroment variable in which the shell looks up for commands when typed by the user.    --- OK
+- root should not have ./ on the $PATH to avoid malicious replacemants of commands. If ./ is used in the path it should appear as the last entry in the variable.  --- OK
+- command completion: Type part of the command or file name then press Tab key. --- OK
+- history keeps record of every command typed. --- OK
+- CTRL-R search backwards for commands in the bash history. When typing the search looks for the first occurence in the history starting from the last command. --- OK
+- Up and down in the command line to retrieve previously executed commands. --- OK
+- CTRL-A move the cursor to the start of the line. --- OK
+- CTRL-E move the cursor to the end of the line. --- OK
+- CTRL-B move backward within a line. --- OK
+- CTRL-F move forward within a line. --- OK
+- CTRL-Right arrow key move a word at a time to the righ. --- OK
+- CTRL-Left arrow key move a word at a time to the righ. --- OK
+- CTRL-D or del key deletes the charracter under the cursor. --- OK
+- CTRL-K deletes all text from the cursor to the end of the line. --- OK
+- CTRL-X and then space deletes all text to the beginning of the line. --- OK
+- CTRL-T transposes the the selected character with the one before the cursor. --- OK
+- ESC-T transposes two words immediately before the cursor. --- OK
+- ESC-U converts all text from the cursor to the end of the word to uppercase. --- OK
+- ESC-L converts all text from the cursor to the end of the word to lowercase. --- OK
+- ESC-C converts the letter under the cursor to uppercase. --- OK
+- CTRL-X CTRL-E the bash attemps to launch the editor defined by $FCEDIT or $EDITOR  --- OK
+- Environment variables are like programs' variable they hold data to be referred by the variable name. They differ from programs' variable since they are relative to the shell enviroment.  --- OK
+- $TERM environment variable contains information about the capabilities of the current terminal. --- OK
+- $PATH environment provides the shell with a directory list to search for commands typed in the command line. --- OK
+- man is the Linux helping system. (short for Manual). --- OK
+- Manual sections --- OK
+-  1   Executable programs and shell commands --- OK
+-  2   System calls provided by the kernel --- OK
+-  3   Library calss provided by program libraries --- OK
+-  4   Device files (usually stored in /dev) --- OK
+-  5   File formats --- OK
+-  6   Games --- OK
+-  7   Miscellaneous (macro packages, conventions, and so on) --- OK
+-  8   System administration commands (programs run mostly or exlusively by root) --- OK
+-  9   kernel routines. --- OK
+-- A stream is a data entity that can be manipulated --- OK
+- Linux handles everything as a file. --- OK
+- file descriptors :  --- OK
+-  STDIN file descriptors is 0. Usually is the input from a keybord. --- OK
+-  STDOUT file descriptor is 1. Programs sends data to the user via stdout. --- OK
+-  STDERR file descriptor is 2. Is sent together with STDOUT, but they can be handled indipendently.  --- OK
+- Common redirection operators  --- OK
+-  >   Creates a new file containing stdout overwriting the file if it already exists. --- OK
+-  >>  Appends stdout to the existing file, the file is created if it does not exist. --- OK
+-  2>  Create a new file containing stderr overwriting the file if it already exists. --- OK
+-  2>> Appends stderr to the existing file, the file is created if it does not exit.  --- OK
+-  &>  Creates a new file containing both stderr and stdout.   --- OK
+-  <   Sends the content of the specified file to be used stdin. No file descriptor necessary.   --- OK
+-  <<  Accepts text on the folloing lines a s tandar input. No file descriptor necessary.  --- OK
+-  <>  Causes the specified file to be used for both standard input and standard output. No file descriptor necessary. --- OK
+   --- OK
+- A pipe redirects a first program stdout to a second program stdin. Example synthax program1 | program2 --- OK
+- tee : command redirects output both to a file and to a pipe. --- OK
+- xargs : builds and executs commands from the standar input.  --- OK
+- backstik ` can be used in a similar manner as xargs example rm `find ./ -user srg` or rm $(find -user srg) --- OK
+- byte : is a unit of digital information that most commonly consists of eight bits. --- OK
+- cat : command is short for concatenate. It links together an arbitrary number of file and sends the result to the stdout. --- OK
+- join : combines two file by matching the contents of specified fields within the files. --- OK
+- paste : merges files line by line, separating the lines from each file with tabs. --- OK
+- expand : converts tabs to spaces. --- OK
+- od : octal dump it displays files in an unambhiguous format. --- OK
+- sort : the file record in several ways. --- OK
+- split : command can split a file into one or more pieces. --- OK
+- tr : command changes individual characters from standard input. --- OK
+- unexpand : converts spaces into tabs. --- OK
+- uniq : remove duplicate lines.  --- OK
+- fmt: simple optimal text formatter. --- OK
+- nl : number lines of files. --- OK
+- kali linux is a debian-derived Linux distribution designed for digital forensics and penetration testing --- OK
+- strings: prints the strings of printable characters in files.  --- OK
+- hexdump, hd : hexadecimal, octal and decimal dump of files.  --- OK
+- xxd make an hexdump or do the revese.  --- OK
+- & in the shell means that what comes next is a file descriptor not an actual file ex >&2 redirect stdout to stderr --- OK
+- form feed is a page breaker. --- OK
+- Control character : in computing and telecommunications, a control character is a code point (a number) in a character set. --- OK
+- head displays the first n lines of a file --- OK
+- tail displays the last lines of a file. --- OK
+- wc word count --- OK
+- less is more : use like vi - h for help --- OK
+- cut extracts portions of input lines and displays them on standard output. --- OK
+- wc command produces a word count, as well as line and byte counts, for a file. --- OK
