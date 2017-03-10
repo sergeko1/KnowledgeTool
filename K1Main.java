@@ -1,4 +1,3 @@
-import javax.swing.JFrame;
 import java.util.ArrayList;
 
 public class K1Main {
@@ -14,9 +13,9 @@ public class K1Main {
 
       // CREATES A FRAME WITH THE FIRST QUESTION
       K1JFrame k1JFrame = new K1JFrame(iterator);
-      k1JFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      k1JFrame.setDefaultCloseOperation(K1JFrame.EXIT_ON_CLOSE);
       k1JFrame.setSize(600,400);
-      k1JFrame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+      k1JFrame.setExtendedState(K1JFrame.MAXIMIZED_BOTH); 
       k1JFrame.setVisible(true);
 
    } // main end
