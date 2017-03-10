@@ -7,23 +7,24 @@ public class K1Iterator {
     private String answer;   
     private int counter;
 
+    // Constructor
     K1Iterator(ArrayList<String> myList) {
         list = myList; 
         counter = 0;
         next();
-       // String line[] = thisLine.split("---");
-        ////question = line[0];
-        //answer = line[1];
     }
  
+    // To be used to get the current question.
     public String getQuestion() {
         return question;
     }
-
+  
+    // To be used to get the current answer.
     public String getAnswer() {
         return answer;
     }
 
+    // To be used to obtain a boolean with the outcome of the supplied answer. 
     public boolean checkAnswer(String givenAnswer) {
        if (givenAnswer.equals(answer)) {
            return true;
@@ -31,6 +32,7 @@ public class K1Iterator {
        return false;
     }
 
+    // The Iterator moves to the next answer.
     public void next() {
        String[] splitted = list.get(counter).split("---");
        question = splitted[0];

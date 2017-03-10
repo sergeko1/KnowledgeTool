@@ -54,7 +54,6 @@ public class K1Layout extends JFrame implements ActionListener {
 
    public void actionPerformed(ActionEvent event) {
       if (event.getSource() == jTextFieldSouth) {
-          System.out.println(jTextFieldSouth.getText());
           answer = jTextFieldSouth.getText().trim();      
           iterator.next();
           jTextFieldCenter.setText(iterator.getQuestion());
