@@ -9,11 +9,11 @@ import java.awt.Font;
 public class K1JFrame extends JFrame implements ActionListener {
 
    private JButton button;
-   private JTextField jTextFieldCenter;
+   private JTextField jTextFieldNorth;
    private JTextField jTextFieldSouth;
+   private JTextField jTextFieldCenter;
 
    private BorderLayout layout;
-   private String answer;
    K1Iterator iterator ;
 
    public K1JFrame(K1Iterator myIterator) 
@@ -28,14 +28,16 @@ public class K1JFrame extends JFrame implements ActionListener {
        button = new JButton("Verify Button");
        button.addActionListener(this);
 
-       jTextFieldCenter = new JTextField();
-       jTextFieldCenter.setText(iterator.getQuestion());
-       jTextFieldCenter.setFont(new Font("Courier", Font.BOLD,12));
+       jTextFieldNorth = new JTextField();
+       jTextFieldNorth.setText(iterator.getQuestion());
+       jTextFieldNorth.setFont(new Font("Courier", Font.BOLD,12));
        jTextFieldSouth = new JTextField();
        jTextFieldSouth.addActionListener(this);
+       jTextFieldCenter = new JTextField();
 
       add(jTextFieldSouth, BorderLayout.SOUTH);
       add(button, BorderLayout.EAST);
+      add(jTextFieldNorth, BorderLayout.NORTH);
       add(jTextFieldCenter, BorderLayout.CENTER);
    }
    
@@ -43,27 +45,27 @@ public class K1JFrame extends JFrame implements ActionListener {
    public void actionPerformed(ActionEvent event) 
    {
       if (event.getSource() == jTextFieldSouth) {
-         answer = jTextFieldSouth.getText().trim();      
+         boolean response = iterator.checkAnswer(jTextFieldSouth.getText());
+         System.out.println("--"+jTextFieldSouth.getText()+"--");
+         System.out.println("--"+iterator.getAnswer()+"--");
+         System.out.println(jTextFieldSouth.getText());
+         jTextFieldCenter.setText("The answer is "+response);
          iterator.next();
-         jTextFieldCenter.setText(iterator.getQuestion());
+         jTextFieldNorth.setText(iterator.getQuestion());
          this.invalidate();
          this.validate();
          this.repaint();
       }
 
       if (event.getSource() == button) 
-         button.setVisible(getResult()); 
-      else  
-         button.setVisible(true);
+         //button.setVisible(getResult()); 
+         System.out.println("Check Answer");
+      //else  
+       //  button.setVisible(true);
 
      layout.layoutContainer(getContentPane());
    } // end method actionPerformed
 
-
-   public String getAnswer() 
-   {
-       return answer;
-   }
 
    public boolean getResult() 
    {
