@@ -8,16 +8,13 @@ import java.awt.Font;
 
 public class K1JFrame extends JFrame implements ActionListener {
 
-   private JButton[] buttons;
+   private JButton button;
    private JTextField jTextFieldCenter;
    private JTextField jTextFieldSouth;
 
-   private static final String[] names = {"Knowledge", "Result", "Stats", "Answer", "Question" };
    private BorderLayout layout;
    private String answer;
-   K1Reader reader;
    K1Iterator iterator ;
-
 
    public K1JFrame(K1Iterator myIterator) {
 
@@ -25,28 +22,20 @@ public class K1JFrame extends JFrame implements ActionListener {
        iterator = myIterator;
 
        layout = new BorderLayout (5,5);
-       reader = new K1Reader();
 
        setLayout(layout);
 
-       buttons = new JButton[names.length];
+       button = new JButton("Verify Button");
+       button.addActionListener(this);
 
-       for (int count = 0; count<names.length;count++) {
-          buttons[count] = new JButton(names[count]);
-          buttons[count].addActionListener(this);
-       }
-
-       reader.openFile();
        jTextFieldCenter = new JTextField();
        jTextFieldCenter.setText(iterator.getQuestion());
        jTextFieldCenter.setFont(new Font("Courier", Font.BOLD,12));
        jTextFieldSouth = new JTextField();
        jTextFieldSouth.addActionListener(this);
 
-      add(buttons[0], BorderLayout.NORTH);
       add(jTextFieldSouth, BorderLayout.SOUTH);
-      add(buttons[2], BorderLayout.EAST);
-      add(buttons[3], BorderLayout.WEST);
+      add(button, BorderLayout.EAST);
       add(jTextFieldCenter, BorderLayout.CENTER);
 
    }
@@ -62,13 +51,13 @@ public class K1JFrame extends JFrame implements ActionListener {
           this.repaint();
       }
 
-      for (JButton button : buttons) {
-          if (event.getSource() == button) 
-            //button.setVisible(false); 
-            button.setVisible(getResult()); 
-          else 
-            button.setVisible(true);
+      if (event.getSource() == button) {
+         //button.setVisible(false); 
+          button.setVisible(getResult()); 
+      } else  {
+          button.setVisible(true);
       }
+
       layout.layoutContainer(getContentPane());
    } // end method actionPerformed
 
