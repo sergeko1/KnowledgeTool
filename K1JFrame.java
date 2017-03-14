@@ -16,8 +16,8 @@ public class K1JFrame extends JFrame implements ActionListener {
    private String answer;
    K1Iterator iterator ;
 
-   public K1JFrame(K1Iterator myIterator) {
-
+   public K1JFrame(K1Iterator myIterator) 
+   {
        super ("Knowledge tool");
        iterator = myIterator;
 
@@ -37,40 +37,41 @@ public class K1JFrame extends JFrame implements ActionListener {
       add(jTextFieldSouth, BorderLayout.SOUTH);
       add(button, BorderLayout.EAST);
       add(jTextFieldCenter, BorderLayout.CENTER);
-
    }
    
 
-   public void actionPerformed(ActionEvent event) {
+   public void actionPerformed(ActionEvent event) 
+   {
       if (event.getSource() == jTextFieldSouth) {
-          answer = jTextFieldSouth.getText().trim();      
-          iterator.next();
-          jTextFieldCenter.setText(iterator.getQuestion());
-          this.invalidate();
-          this.validate();
-          this.repaint();
+         answer = jTextFieldSouth.getText().trim();      
+         iterator.next();
+         jTextFieldCenter.setText(iterator.getQuestion());
+         this.invalidate();
+         this.validate();
+         this.repaint();
       }
 
-      if (event.getSource() == button) {
-         //button.setVisible(false); 
-          button.setVisible(getResult()); 
-      } else  {
-          button.setVisible(true);
-      }
+      if (event.getSource() == button) 
+         button.setVisible(getResult()); 
+      else  
+         button.setVisible(true);
 
-      layout.layoutContainer(getContentPane());
+     layout.layoutContainer(getContentPane());
    } // end method actionPerformed
 
 
-   public String getAnswer() {
+   public String getAnswer() 
+   {
        return answer;
    }
 
-   public boolean getResult() {
+   public boolean getResult() 
+   {
       return true;
    } // end getResult
    
-   public boolean getBoolean() {
+   public boolean getBoolean() 
+   {
        return false;
    }
 
