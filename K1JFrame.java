@@ -6,8 +6,8 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.Font;
 
-public class K1JFrame extends JFrame implements ActionListener {
-
+public class K1JFrame extends JFrame implements ActionListener 
+{
    private JButton button;
    private JTextField jTextFieldNorth;
    private JTextField jTextFieldSouth;
@@ -30,7 +30,7 @@ public class K1JFrame extends JFrame implements ActionListener {
 
        jTextFieldNorth = new JTextField();
        jTextFieldNorth.setText(iterator.getQuestion());
-       jTextFieldNorth.setFont(new Font("Courier", Font.BOLD,12));
+       jTextFieldNorth.setFont(new Font("Courier", Font.BOLD,16));
        jTextFieldSouth = new JTextField();
        jTextFieldSouth.addActionListener(this);
        jTextFieldCenter = new JTextField();
@@ -41,7 +41,6 @@ public class K1JFrame extends JFrame implements ActionListener {
       add(jTextFieldCenter, BorderLayout.CENTER);
    }
    
-
    public void actionPerformed(ActionEvent event) 
    {
       if (event.getSource() == jTextFieldSouth) {
@@ -76,5 +75,4 @@ public class K1JFrame extends JFrame implements ActionListener {
    {
        return false;
    }
-
 } // end class

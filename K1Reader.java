@@ -11,7 +11,7 @@ public class K1Reader {
    // Opens the file for reading
    public void openFile() {
       try {
-         input = new Scanner(new File("know/test.txt")); 
+         input = new Scanner(new File("know/mountopts.txt")); 
       }  
       catch (FileNotFoundException fileNotFoundException) {
           System.err.println("Error opening File");
