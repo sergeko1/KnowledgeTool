@@ -4,16 +4,8 @@ public class K1Main
 {
    public static void main(String[] args) 
    {
-      // READS FILE TO AN ARRAYLIST 
-      K1Reader reader = new K1Reader();
-      reader.openFile();
-      ArrayList<String> list = reader.readRecordsToArrayList();
-
-      // Instance to get the interactions 
-      K1Iterator iterator = new K1Iterator(list);
-
       // Build the JFrame with the K1Iterator to process the interactions 
-      buildFrame(iterator) ;
+      buildFrame(new K1Iterator(readFile())) ;
    } // main end
 
    // Method to build the main program JFrame
@@ -25,5 +17,13 @@ public class K1Main
        k1JFrame.setExtendedState(K1JFrame.MAXIMIZED_BOTH); 
        k1JFrame.setVisible(true);
    } // end of buildFrame method
+
+   static ArrayList<String> readFile() 
+   {
+      K1Reader reader = new K1Reader();
+      reader.openFile();
+      ArrayList<String> list = reader.readRecordsToArrayList();
+      return list;
+   }
 
 }// Class end
