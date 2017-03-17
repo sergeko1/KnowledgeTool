@@ -20,10 +20,8 @@ public class K1Reader {
    }
 
 
-   public void readRecords() 
-   {
-      while (input.hasNext()) 
-      {
+   public void readRecords() {
+      while (input.hasNext()) {
         System.out.println(input.next());
       }
    }

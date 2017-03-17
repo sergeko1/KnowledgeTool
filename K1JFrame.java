@@ -6,8 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.Font;
 
-public class K1JFrame extends JFrame implements ActionListener 
-{
+public class K1JFrame extends JFrame implements ActionListener {
    private JButton button;
    private JTextField jTextFieldNorth;
    private JTextField jTextFieldSouth;
@@ -16,8 +15,7 @@ public class K1JFrame extends JFrame implements ActionListener
    private BorderLayout layout;
    K1Iterator iterator ;
 
-   public K1JFrame(K1Iterator myIterator) 
-   {
+   public K1JFrame(K1Iterator myIterator) {
       super ("Knowledge tool");
       iterator = myIterator;
 
@@ -43,8 +41,7 @@ public class K1JFrame extends JFrame implements ActionListener
       add(jTextFieldCenter, BorderLayout.CENTER);
    }
    
-   public void actionPerformed(ActionEvent event) 
-   {
+   public void actionPerformed(ActionEvent event) {
       if (event.getSource() == jTextFieldSouth) {
          boolean response = iterator.checkAnswer(jTextFieldSouth.getText());
          System.out.println("--"+jTextFieldSouth.getText()+"--");
@@ -52,8 +49,7 @@ public class K1JFrame extends JFrame implements ActionListener
          System.out.println(jTextFieldSouth.getText());
          jTextFieldCenter.setText("The answer is "+response);
 
-         if (iterator.hasNext())
-         { 
+         if (iterator.hasNext()) { 
             iterator.next();
             jTextFieldNorth.setText(iterator.getQuestion());
          } else {
