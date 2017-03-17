@@ -36,6 +36,15 @@ public class K1Iterator
            return false;
     }
 
+    // Checks for last question
+    public boolean hasNext() 
+    {
+       if (counter<(list.size()))
+          return true;
+       else 
+          return false; 
+    }
+
     // The Iterator moves to the next answer.
     public void next() 
     {

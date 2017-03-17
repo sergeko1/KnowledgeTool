@@ -22,8 +22,7 @@ public class K1Main
    {
       K1Reader reader = new K1Reader();
       reader.openFile();
-      ArrayList<String> list = reader.readRecordsToArrayList();
-      return list;
+      return reader.readRecordsToArrayList();
    }
 
 }// Class end

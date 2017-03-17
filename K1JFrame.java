@@ -18,22 +18,24 @@ public class K1JFrame extends JFrame implements ActionListener
 
    public K1JFrame(K1Iterator myIterator) 
    {
-       super ("Knowledge tool");
-       iterator = myIterator;
+      super ("Knowledge tool");
+      iterator = myIterator;
 
-       layout = new BorderLayout (5,5);
+      layout = new BorderLayout (5,5);
 
-       setLayout(layout);
+      setLayout(layout);
 
-       button = new JButton("Verify Button");
-       button.addActionListener(this);
+      button = new JButton("Verify Button");
+      button.addActionListener(this);
 
-       jTextFieldNorth = new JTextField();
-       jTextFieldNorth.setText(iterator.getQuestion());
-       jTextFieldNorth.setFont(new Font("Courier", Font.BOLD,16));
-       jTextFieldSouth = new JTextField();
-       jTextFieldSouth.addActionListener(this);
-       jTextFieldCenter = new JTextField();
+      jTextFieldNorth = new JTextField();
+      jTextFieldNorth.setText(iterator.getQuestion());
+      jTextFieldNorth.setFont(new Font("Courier", Font.BOLD,16));
+
+      jTextFieldSouth = new JTextField();
+      jTextFieldSouth.addActionListener(this);
+
+      jTextFieldCenter = new JTextField();
 
       add(jTextFieldSouth, BorderLayout.SOUTH);
       add(button, BorderLayout.EAST);
@@ -49,8 +51,15 @@ public class K1JFrame extends JFrame implements ActionListener
          System.out.println("--"+iterator.getAnswer()+"--");
          System.out.println(jTextFieldSouth.getText());
          jTextFieldCenter.setText("The answer is "+response);
-         iterator.next();
-         jTextFieldNorth.setText(iterator.getQuestion());
+
+         if (iterator.hasNext())
+         { 
+            iterator.next();
+            jTextFieldNorth.setText(iterator.getQuestion());
+         } else {
+            jTextFieldNorth.setText("The test is finished");
+         }
+
          this.invalidate();
          this.validate();
          this.repaint();
@@ -65,14 +74,4 @@ public class K1JFrame extends JFrame implements ActionListener
      layout.layoutContainer(getContentPane());
    } // end method actionPerformed
 
-
-   public boolean getResult() 
-   {
-      return true;
-   } // end getResult
-   
-   public boolean getBoolean() 
-   {
-       return false;
-   }
 } // end class
