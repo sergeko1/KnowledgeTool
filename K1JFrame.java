@@ -13,6 +13,8 @@ public class K1JFrame extends JFrame implements ActionListener {
    private JTextField jTextFieldCenter;
 
    private BorderLayout layout;
+   int counter = 0;
+   boolean checkAnswer = true;
    K1Iterator iterator ;
 
    public K1JFrame(K1Iterator myIterator) {
@@ -23,7 +25,7 @@ public class K1JFrame extends JFrame implements ActionListener {
 
       setLayout(layout);
 
-      button = new JButton("Verify Button");
+      button = new JButton((counter/2+1)+"/"+iterator.size());
       button.addActionListener(this);
 
       jTextFieldNorth = new JTextField();
@@ -39,33 +41,36 @@ public class K1JFrame extends JFrame implements ActionListener {
       add(button, BorderLayout.EAST);
       add(jTextFieldNorth, BorderLayout.NORTH);
       add(jTextFieldCenter, BorderLayout.CENTER);
+      System.out.println(iterator.size()+1); 
    }
    
    public void actionPerformed(ActionEvent event) {
-      if (event.getSource() == jTextFieldSouth) {
-         boolean response = iterator.checkAnswer(jTextFieldSouth.getText());
-         System.out.println("--"+jTextFieldSouth.getText()+"--");
-         System.out.println("--"+iterator.getAnswer()+"--");
-         System.out.println(jTextFieldSouth.getText());
-         jTextFieldCenter.setText("The answer is "+response);
 
-         if (iterator.hasNext()) { 
+      if (event.getSource() == jTextFieldSouth && counter <= iterator.size()) {
+
+         // Logic to handle the list of question within a the JFrame
+         if (iterator.hasNext() && !checkAnswer) { 
+            button.setText(""+(counter+1)+"/"+iterator.size());
             iterator.next();
             jTextFieldNorth.setText(iterator.getQuestion());
-         } else {
-            jTextFieldNorth.setText("The test is finished");
+            jTextFieldCenter.setText("");
+            jTextFieldSouth.setText("");
+            checkAnswer = true;
+         } else if ( checkAnswer ){
+            boolean response = iterator.checkAnswer(jTextFieldSouth.getText());
+            jTextFieldCenter.setText("The answer is "+response);
+            counter++;
+            checkAnswer = false;
+         } else if (counter == iterator.size()) {
+            jTextFieldNorth.setText("");
+            jTextFieldSouth.setText("");
+            jTextFieldCenter.setText("The test is finished");
          }
 
          this.invalidate();
          this.validate();
          this.repaint();
       }
-
-      if (event.getSource() == button) 
-         //button.setVisible(getResult()); 
-         System.out.println("Check Answer");
-      //else  
-       //  button.setVisible(true);
 
      layout.layoutContainer(getContentPane());
    } // end method actionPerformed

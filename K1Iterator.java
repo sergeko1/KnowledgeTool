@@ -40,6 +40,10 @@ public class K1Iterator {
           return false; 
     }
 
+    protected int size() {
+       return list.size();
+    }
+
     // The Iterator moves to the next answer.
     public void next() {
        String[] splitted = list.get(counter).split("@");
@@ -48,3 +52,4 @@ public class K1Iterator {
        counter++;
     } // end of next()
 } // end of Class
+
