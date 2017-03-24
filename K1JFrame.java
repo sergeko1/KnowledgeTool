@@ -4,13 +4,15 @@ import java.awt.event.ActionEvent;
 import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JTextField;
+import javax.swing.JTextArea;
 import java.awt.Font;
 
 public class K1JFrame extends JFrame implements ActionListener {
-   private JButton button;
+   private JButton buttonEast;
+   private JButton buttonWest;
    private JTextField jTextFieldNorth;
    private JTextField jTextFieldSouth;
-   private JTextField jTextFieldCenter;
+   private JTextArea jTextAreaCenter;
 
    private BorderLayout layout;
    int counter = 0;
@@ -25,8 +27,11 @@ public class K1JFrame extends JFrame implements ActionListener {
 
       setLayout(layout);
 
-      button = new JButton((counter/2+1)+"/"+iterator.size());
-      button.addActionListener(this);
+      buttonWest = new JButton((counter/2+1)+"/"+iterator.size());
+      buttonWest.addActionListener(this);
+
+      buttonEast = new JButton();
+      buttonEast.addActionListener(this);
 
       jTextFieldNorth = new JTextField();
       jTextFieldNorth.setText(iterator.getQuestion());
@@ -35,13 +40,14 @@ public class K1JFrame extends JFrame implements ActionListener {
       jTextFieldSouth = new JTextField();
       jTextFieldSouth.addActionListener(this);
 
-      jTextFieldCenter = new JTextField();
+      jTextAreaCenter = new JTextArea();
+      jTextAreaCenter.setFont(new Font("Courier", Font.BOLD,16));
 
       add(jTextFieldSouth, BorderLayout.SOUTH);
-      add(button, BorderLayout.EAST);
+      add(buttonEast, BorderLayout.EAST);
+      add(buttonWest, BorderLayout.WEST);
       add(jTextFieldNorth, BorderLayout.NORTH);
-      add(jTextFieldCenter, BorderLayout.CENTER);
-      System.out.println(iterator.size()+1); 
+      add(jTextAreaCenter, BorderLayout.CENTER);
    }
    
    public void actionPerformed(ActionEvent event) {
@@ -50,21 +56,21 @@ public class K1JFrame extends JFrame implements ActionListener {
 
          // Logic to handle the list of question within a the JFrame
          if (iterator.hasNext() && !checkAnswer) { 
-            button.setText(""+(counter+1)+"/"+iterator.size());
+            buttonWest.setText(""+(counter+1)+"/"+iterator.size());
             iterator.next();
             jTextFieldNorth.setText(iterator.getQuestion());
-            jTextFieldCenter.setText("");
+            jTextAreaCenter.setText("");
             jTextFieldSouth.setText("");
             checkAnswer = true;
          } else if ( checkAnswer ){
             boolean response = iterator.checkAnswer(jTextFieldSouth.getText());
-            jTextFieldCenter.setText("The answer is "+response);
+            jTextAreaCenter.setText("The answer entered is "+response+"\nThe answer is:"+iterator.getAnswer());
             counter++;
             checkAnswer = false;
          } else if (counter == iterator.size()) {
             jTextFieldNorth.setText("");
             jTextFieldSouth.setText("");
-            jTextFieldCenter.setText("The test is finished");
+            jTextAreaCenter.setText("The test is finished");
          }
 
          this.invalidate();

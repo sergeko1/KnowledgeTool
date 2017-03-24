@@ -1,0 +1,16 @@
+Causes the default options for this filesystem to be used@defaults
+Allows a file to be mounted as it were a disk@loop
+Mount or doesn't mount at boot or when the command mount -a is issued@auto or noauto
+Allows or disallows ordinary users to mount this fs@user
+Allows users to mount a fs and all users to unmount it@users
+Similar to user except that the user must own the device file@owner
+Allows to change options on a mounted fs@remount
+Mount read only fsm@ro
+Mount write only fs@rw
+Msdos fs mountad as a particular user@uid=value
+Msdos fs mountad as a particular group@gid=value
+Files and directories mask@umask=value
+Files umask@fmask=value
+Directories umask@dmask=value
+Conversion code for binary and text b=binary t=text@conv=code
+Sergio@conv
