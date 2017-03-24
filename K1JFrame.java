@@ -24,7 +24,7 @@ public class K1JFrame extends JFrame implements ActionListener {
    K1Iterator iterator ;
 
    public K1JFrame(K1Iterator myIterator) {
-      super ("Knowledge tool");
+      super (myIterator.getTitle());
       iterator = myIterator;
       addContent();
    }
@@ -65,10 +65,11 @@ public class K1JFrame extends JFrame implements ActionListener {
 
    public void addContent() {
 
-      myFont = new Font("Courier", Font.BOLD,16);
+      myFont = new Font("Courier", Font.BOLD,18);
 
       buttonEast = new JButton((counter/2+1)+"/"+iterator.size());
       buttonEast.addActionListener(this);
+      buttonEast.setFont(myFont);
 
       buttonWest = new JButton();
       buttonWest.addActionListener(this);
@@ -76,12 +77,14 @@ public class K1JFrame extends JFrame implements ActionListener {
       jTextFieldNorth = new JTextField();
       jTextFieldNorth.setText(iterator.getQuestion());
       jTextFieldNorth.setFont(myFont);
+      jTextFieldNorth.setEditable(false);
 
       jTextFieldSouth = new JTextField();
       jTextFieldSouth.addActionListener(this);
 
       jTextAreaCenter = new JTextArea();
       jTextAreaCenter.setFont(myFont);
+      jTextAreaCenter.setEditable(false);
 
       add(jTextFieldSouth, BorderLayout.SOUTH);
       add(buttonEast, BorderLayout.EAST);

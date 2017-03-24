@@ -1,2 +1,4 @@
-- add the name of the file being read on the top of the main window
+OK - add the name of the file being read on the top of the main window
 - gets the file to be read from command line
+- start working on stats
+- add a correct wrong answer summary

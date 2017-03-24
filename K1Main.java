@@ -4,7 +4,10 @@ public class K1Main {
 
    public static void main(String[] args) {
       // Build the JFrame with the K1Iterator to process the interactions 
-      buildFrame(new K1Iterator(readFile())) ;
+      if (args.length == 1)
+        buildFrame(new K1Iterator(readFile(args[0]), args[0])) ;
+      else 
+        buildFrame(new K1Iterator(readFile("know/default.txt"), "know/default.txt")) ;
    } // main end
 
    // Method to build the main program JFrame
@@ -16,10 +19,11 @@ public class K1Main {
        k1JFrame.setVisible(true);
    } // end of buildFrame method
 
-   static ArrayList<String> readFile() {
+   static ArrayList<String> readFile(String file) {
       K1Reader reader = new K1Reader();
-      reader.openFile();
+      reader.openFile(file);
       return reader.readRecordsToArrayList();
    }
+
 
 }// Class end

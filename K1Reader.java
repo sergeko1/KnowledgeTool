@@ -7,25 +7,16 @@ public class K1Reader {
 
    private Scanner input;
  
-
    // Opens the file for reading
-   public void openFile() {
+   public void openFile(String file) {
       try {
-         input = new Scanner(new File("know/mountopts.txt")); 
+         input = new Scanner(new File(file)); 
       }  
       catch (FileNotFoundException fileNotFoundException) {
           System.err.println("Error opening File");
           System.exit(1); 
       }
    }
-
-
-   public void readRecords() {
-      while (input.hasNext()) {
-        System.out.println(input.next());
-      }
-   }
-
 
    // Reads the files to tan ArrayList<String>
    public ArrayList<String> readRecordsToArrayList() {
@@ -35,11 +26,6 @@ public class K1Reader {
       }
       return lines;
    } 
-
-
-   public void print() {
-      System.out.println("record");
-   }
 
 }
 

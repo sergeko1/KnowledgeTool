@@ -5,20 +5,28 @@ public class K1Iterator {
     private ArrayList<String> list;
     private String question;
     private String answer;   
+    private String title;   
     private int counter;
 
     // Constructor
-    K1Iterator(ArrayList<String> myList) {
+    K1Iterator(ArrayList<String> myList, String myTitle) {
         list = myList; 
+        title = myTitle;
         counter = 0;
         next();
     }
- 
+
+    // To be used to get the Title of the JFrame
+    public String getTitle() {
+        return title;
+    }
+
     // To be used to get the current question.
     public String getQuestion() {
         return question;
     }
   
+    
     // To be used to get the current answer.
     public String getAnswer() {
         return answer;
