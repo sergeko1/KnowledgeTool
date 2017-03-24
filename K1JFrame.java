@@ -93,12 +93,11 @@ public class K1JFrame extends JFrame implements ActionListener {
    }
 
    public void setIcon(String iconFile) {
-	  try {
-        Image img = ImageIO.read(getClass().getResource(iconFile));
-		buttonWest.setIcon(new ImageIcon(img));
-	  } catch (Exception ex) {
-		System.out.println(ex);
-	  }
-
+      try {
+         Image img = ImageIO.read(getClass().getResource(iconFile));
+         buttonWest.setIcon(new ImageIcon(img));
+      } catch (Exception ex) {
+         System.out.println(ex);
+      }
    }
 } // end class
