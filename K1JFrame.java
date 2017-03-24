@@ -16,6 +16,7 @@ public class K1JFrame extends JFrame implements ActionListener {
    private JTextField jTextFieldNorth;
    private JTextField jTextFieldSouth;
    private JTextArea jTextAreaCenter;
+   private Font myFont;
 
    //private BorderLayout layout;
    int counter = 0;
@@ -25,33 +26,7 @@ public class K1JFrame extends JFrame implements ActionListener {
    public K1JFrame(K1Iterator myIterator) {
       super ("Knowledge tool");
       iterator = myIterator;
-
-//      layout = new BorderLayout (5,5);
-
- //     setLayout(layout);
-
-      buttonWest = new JButton((counter/2+1)+"/"+iterator.size());
-      buttonWest.addActionListener(this);
-
-      buttonEast = new JButton();
-      buttonEast.addActionListener(this);
-      jTextFieldNorth = new JTextField();
-      jTextFieldNorth.setText(iterator.getQuestion());
-      jTextFieldNorth.setFont(new Font("Courier", Font.BOLD,16));
-
-      jTextFieldSouth = new JTextField();
-      jTextFieldSouth.addActionListener(this);
-
-      jTextAreaCenter = new JTextArea();
-      jTextAreaCenter.setFont(new Font("Courier", Font.BOLD,16));
-      add();
-/*
-      add(jTextFieldSouth, BorderLayout.SOUTH);
-      add(buttonEast, BorderLayout.EAST);
-      add(buttonWest, BorderLayout.WEST);
-      add(jTextFieldNorth, BorderLayout.NORTH);
-      add(jTextAreaCenter, BorderLayout.CENTER);
-      */
+      addContent();
    }
    
    public void actionPerformed(ActionEvent event) {
@@ -60,19 +35,17 @@ public class K1JFrame extends JFrame implements ActionListener {
 
          // Logic to handle the list of question within a the JFrame
          if (iterator.hasNext() && !checkAnswer) { 
-            buttonWest.setText(""+(counter+1)+"/"+iterator.size());
+            buttonEast.setText(""+(counter+1)+"/"+iterator.size());
             iterator.next();
             jTextFieldNorth.setText(iterator.getQuestion());
             jTextAreaCenter.setText("");
             jTextFieldSouth.setText("");
             checkAnswer = true;
-            setIcon("img/question.png");
+            setIcon("img/question.png"); // sets the question icon
          } else if ( checkAnswer ){
             boolean response = iterator.checkAnswer(jTextFieldSouth.getText());
             jTextAreaCenter.setText("The answer entered is "+response+"\nThe answer is:"+iterator.getAnswer());
-
             setIcon((response)?"img/OK.png":"img/NotOK.png"); // sets the correct Icon
-
             counter++;
             checkAnswer = false;
          } else if (counter == iterator.size()) {
@@ -90,19 +63,39 @@ public class K1JFrame extends JFrame implements ActionListener {
    } // end method actionPerformed
 
 
-   public void add() {
+   public void addContent() {
+
+      myFont = new Font("Courier", Font.BOLD,16);
+
+      buttonEast = new JButton((counter/2+1)+"/"+iterator.size());
+      buttonEast.addActionListener(this);
+
+      buttonWest = new JButton();
+      buttonWest.addActionListener(this);
+
+      jTextFieldNorth = new JTextField();
+      jTextFieldNorth.setText(iterator.getQuestion());
+      jTextFieldNorth.setFont(myFont);
+
+      jTextFieldSouth = new JTextField();
+      jTextFieldSouth.addActionListener(this);
+
+      jTextAreaCenter = new JTextArea();
+      jTextAreaCenter.setFont(myFont);
+
       add(jTextFieldSouth, BorderLayout.SOUTH);
       add(buttonEast, BorderLayout.EAST);
       add(buttonWest, BorderLayout.WEST);
       add(jTextFieldNorth, BorderLayout.NORTH);
       add(jTextAreaCenter, BorderLayout.CENTER);
+      setIcon("img/question.png"); // sets the question icon
    
    }
 
    public void setIcon(String iconFile) {
 	  try {
         Image img = ImageIO.read(getClass().getResource(iconFile));
-		buttonEast.setIcon(new ImageIcon(img));
+		buttonWest.setIcon(new ImageIcon(img));
 	  } catch (Exception ex) {
 		System.out.println(ex);
 	  }
