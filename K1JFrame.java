@@ -6,6 +6,9 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JTextArea;
 import java.awt.Font;
+import java.awt.Image;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 public class K1JFrame extends JFrame implements ActionListener {
    private JButton buttonEast;
@@ -14,7 +17,7 @@ public class K1JFrame extends JFrame implements ActionListener {
    private JTextField jTextFieldSouth;
    private JTextArea jTextAreaCenter;
 
-   private BorderLayout layout;
+   //private BorderLayout layout;
    int counter = 0;
    boolean checkAnswer = true;
    K1Iterator iterator ;
@@ -23,16 +26,15 @@ public class K1JFrame extends JFrame implements ActionListener {
       super ("Knowledge tool");
       iterator = myIterator;
 
-      layout = new BorderLayout (5,5);
+//      layout = new BorderLayout (5,5);
 
-      setLayout(layout);
+ //     setLayout(layout);
 
       buttonWest = new JButton((counter/2+1)+"/"+iterator.size());
       buttonWest.addActionListener(this);
 
       buttonEast = new JButton();
       buttonEast.addActionListener(this);
-
       jTextFieldNorth = new JTextField();
       jTextFieldNorth.setText(iterator.getQuestion());
       jTextFieldNorth.setFont(new Font("Courier", Font.BOLD,16));
@@ -42,12 +44,14 @@ public class K1JFrame extends JFrame implements ActionListener {
 
       jTextAreaCenter = new JTextArea();
       jTextAreaCenter.setFont(new Font("Courier", Font.BOLD,16));
-
+      add();
+/*
       add(jTextFieldSouth, BorderLayout.SOUTH);
       add(buttonEast, BorderLayout.EAST);
       add(buttonWest, BorderLayout.WEST);
       add(jTextFieldNorth, BorderLayout.NORTH);
       add(jTextAreaCenter, BorderLayout.CENTER);
+      */
    }
    
    public void actionPerformed(ActionEvent event) {
@@ -62,9 +66,13 @@ public class K1JFrame extends JFrame implements ActionListener {
             jTextAreaCenter.setText("");
             jTextFieldSouth.setText("");
             checkAnswer = true;
+            setIcon("img/question.png");
          } else if ( checkAnswer ){
             boolean response = iterator.checkAnswer(jTextFieldSouth.getText());
             jTextAreaCenter.setText("The answer entered is "+response+"\nThe answer is:"+iterator.getAnswer());
+
+            setIcon((response)?"img/OK.png":"img/NotOK.png"); // sets the correct Icon
+
             counter++;
             checkAnswer = false;
          } else if (counter == iterator.size()) {
@@ -78,7 +86,26 @@ public class K1JFrame extends JFrame implements ActionListener {
          this.repaint();
       }
 
-     layout.layoutContainer(getContentPane());
+  //   layout.layoutContainer(getContentPane());
    } // end method actionPerformed
 
+
+   public void add() {
+      add(jTextFieldSouth, BorderLayout.SOUTH);
+      add(buttonEast, BorderLayout.EAST);
+      add(buttonWest, BorderLayout.WEST);
+      add(jTextFieldNorth, BorderLayout.NORTH);
+      add(jTextAreaCenter, BorderLayout.CENTER);
+   
+   }
+
+   public void setIcon(String iconFile) {
+	  try {
+        Image img = ImageIO.read(getClass().getResource(iconFile));
+		buttonEast.setIcon(new ImageIcon(img));
+	  } catch (Exception ex) {
+		System.out.println(ex);
+	  }
+
+   }
 } // end class
