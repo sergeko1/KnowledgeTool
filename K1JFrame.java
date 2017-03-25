@@ -17,9 +17,9 @@ public class K1JFrame extends JFrame implements ActionListener {
    K1Iterator iterator ;
 
    public K1JFrame(K1Iterator myIterator) {
-      super (myIterator.getTitle());
-      iterator = myIterator;
-      addContent();
+      super (myIterator.getTitle()); // Gets The window title from the Iterator
+      iterator = myIterator; // myIterator assigned to iterator in instance 
+      addContent(); // adds JButtons and JTextFields to the JFrame
    }
    
    public void actionPerformed(ActionEvent event) {
@@ -47,6 +47,7 @@ public class K1JFrame extends JFrame implements ActionListener {
             jTextAreaCenter.setText("The test is finished");
          }
 
+         // reload JFrame
          this.invalidate();
          this.validate();
          this.repaint();
@@ -59,7 +60,7 @@ public class K1JFrame extends JFrame implements ActionListener {
 
       myFont = new Font("Courier", Font.BOLD,18);
 
-      buttonEast = new JButton((counter/2+1)+"/"+iterator.size());
+      buttonEast = new JButton("1"+"/"+iterator.size());
       buttonEast.addActionListener(this);
       buttonEast.setFont(myFont);
 
