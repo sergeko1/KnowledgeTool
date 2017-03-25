@@ -1,14 +1,7 @@
-import java.awt.BorderLayout;
-import java.awt.event.ActionListener; 
-import java.awt.event.ActionEvent; 
-import javax.swing.JFrame;
-import javax.swing.JButton;
-import javax.swing.JTextField;
-import javax.swing.JTextArea;
-import java.awt.Font;
-import java.awt.Image;
+import java.awt.*;
+import java.awt.event.*; 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
 public class K1JFrame extends JFrame implements ActionListener {
    private JButton buttonEast;
@@ -59,7 +52,6 @@ public class K1JFrame extends JFrame implements ActionListener {
          this.repaint();
       }
 
-  //   layout.layoutContainer(getContentPane());
    } // end method actionPerformed
 
 
@@ -97,8 +89,8 @@ public class K1JFrame extends JFrame implements ActionListener {
 
    public void setIcon(String iconFile) {
       try {
-         Image img = ImageIO.read(getClass().getResource(iconFile));
-         buttonWest.setIcon(new ImageIcon(img));
+         //Image img = ImageIO.read(getClass().getResource(iconFile));
+         buttonWest.setIcon(new ImageIcon(ImageIO.read(getClass().getResource(iconFile))));
       } catch (Exception ex) {
          System.out.println(ex);
       }
