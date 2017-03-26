@@ -1,4 +1,8 @@
-OK - add the name of the file being read on the top of the main window
-- gets the file to be read from command line
+OK - add the name of the file being read on the top of the main window.
+OK - gets the file to be read from command line.
+OK - possibility of having a random generated list of question from the chosen file.
+OK - add a correct wrong answer summary
+
 - start working on stats
-- add a correct wrong answer summary
+- multiple answer questions
+- 
