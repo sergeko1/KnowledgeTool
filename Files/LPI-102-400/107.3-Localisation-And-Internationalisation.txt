@@ -1,0 +1,3 @@
+It is a way of specifying the computer's language, country and related information for the purpose of customizing displays@locale
+An enviroment variable holding the time zone information@TZ
+Convert text from a character encoding to another@iconv

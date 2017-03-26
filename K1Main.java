@@ -7,7 +7,7 @@ public class K1Main {
       if (args.length == 1)
         buildFrame(new K1Iterator(readFile(args[0]), args[0])) ;
       else 
-        buildFrame(new K1Iterator(readFile("know/default.txt"), "know/default.txt")) ;
+        buildFrame(new K1Iterator(readFile("Files/default.txt"), "Files/default.txt")) ;
    } // main end
 
    // Method to build the main program JFrame

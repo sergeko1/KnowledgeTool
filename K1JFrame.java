@@ -4,12 +4,14 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class K1JFrame extends JFrame implements ActionListener {
-   private JButton buttonEast;
+  // private JButton buttonEast;
+   private JTextArea jTextAreaEast;
    private JButton buttonWest;
    private JTextField jTextFieldNorth;
    private JTextField jTextFieldSouth;
    private JTextArea jTextAreaCenter;
    private Font myFont;
+   private K1StatsWriter statsWriter;
 
    //private BorderLayout layout;
    int counter = 0;
@@ -19,7 +21,9 @@ public class K1JFrame extends JFrame implements ActionListener {
    public K1JFrame(K1Iterator myIterator) {
       super (myIterator.getTitle()); // Gets The window title from the Iterator
       iterator = myIterator; // myIterator assigned to iterator in instance 
+      statsWriter = new K1StatsWriter(iterator.size());
       addContent(); // adds JButtons and JTextFields to the JFrame
+
    }
    
    public void actionPerformed(ActionEvent event) {
@@ -28,17 +32,20 @@ public class K1JFrame extends JFrame implements ActionListener {
 
          // Logic to handle the list of question within a the JFrame
          if (iterator.hasNext() && !checkAnswer) { 
-            buttonEast.setText(""+(counter+1)+"/"+iterator.size());
+            //buttonEast.setText(""+(counter+1)+"/"+iterator.size()+"\n"+statsWriter.printTotalString());
             iterator.next();
             jTextFieldNorth.setText(iterator.getQuestion());
             jTextAreaCenter.setText("");
             jTextFieldSouth.setText("");
             checkAnswer = true;
             setIcon("img/question.png"); // sets the question icon
+            jTextAreaEast.setText(statsWriter.printTotalString()+"\n"+"Progression:"+(counter+1)+"/"+iterator.size()+"\n");
          } else if ( checkAnswer ){
             boolean response = iterator.checkAnswer(jTextFieldSouth.getText());
-            jTextAreaCenter.setText("The answer entered is "+response+"\nThe answer is:"+iterator.getAnswer());
+            jTextAreaCenter.setText("The answer entered is "+jTextFieldSouth.getText()+"\nThe answer is:"+iterator.getAnswer());
             setIcon((response)?"img/OK.png":"img/NotOK.png"); // sets the correct Icon
+            statsWriter.add(response); // sets the correct Icon
+            jTextAreaEast.setText(statsWriter.printTotalString()+"\n"+"Progression:"+(counter+1)+"/"+iterator.size()+"\n");
             counter++;
             checkAnswer = false;
          } else if (counter == iterator.size()) {
@@ -47,6 +54,7 @@ public class K1JFrame extends JFrame implements ActionListener {
             jTextAreaCenter.setText("The test is finished");
          }
 
+         // statsWriter.printTotal(); // sets the correct Icon
          // reload JFrame
          this.invalidate();
          this.validate();
@@ -60,9 +68,10 @@ public class K1JFrame extends JFrame implements ActionListener {
 
       myFont = new Font("Courier", Font.BOLD,18);
 
-      buttonEast = new JButton("1"+"/"+iterator.size());
-      buttonEast.addActionListener(this);
-      buttonEast.setFont(myFont);
+      //jTextAreaEast = new JTextArea("1"+"/"+iterator.size());
+      jTextAreaEast = new JTextArea(statsWriter.printTotalString()+"\n"+"Progression:"+(counter+1)+"/"+iterator.size()+"\n");
+      jTextAreaEast.setFont(new Font("Courier", Font.BOLD,14));
+      jTextAreaEast.setEditable(false);
 
       buttonWest = new JButton();
       buttonWest.addActionListener(this);
@@ -80,7 +89,7 @@ public class K1JFrame extends JFrame implements ActionListener {
       jTextAreaCenter.setEditable(false);
 
       add(jTextFieldSouth, BorderLayout.SOUTH);
-      add(buttonEast, BorderLayout.EAST);
+      add(jTextAreaEast, BorderLayout.EAST);
       add(buttonWest, BorderLayout.WEST);
       add(jTextFieldNorth, BorderLayout.NORTH);
       add(jTextAreaCenter, BorderLayout.CENTER);
