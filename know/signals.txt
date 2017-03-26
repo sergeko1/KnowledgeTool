@@ -1,6 +1,0 @@
-SIGHUP hung up read configuration @1
-SIGINT interrupt ctrl-c @2
-SIGTERM Terminate nicely @15
-SIGTSTOP Stop @19
-SIGTSTP Stop @20
-SIGCONT Continue @18

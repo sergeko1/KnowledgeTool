@@ -1,4 +1,0 @@
-eins@one
-zwei@two
-drei@three
-vier@four

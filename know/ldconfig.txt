@@ -1,8 +1,0 @@
-ldconfig : display verbose information @-v
-ldconfig : don't rebuild the cache, updates links only @-N
-ldconfig : process only specified directories @-n
-ldconfig : don't update links @-X
-ldconfig : use a new configuration file instead of /etc/ld.so.conf @-f
-ldconfig : use new cache file @-C
-ldconfig : use a new root @-r dir
-ldconfig : display curreenti information @-p
