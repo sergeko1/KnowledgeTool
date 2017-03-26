@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class K1Iterator {
 
@@ -16,9 +17,23 @@ public class K1Iterator {
         next();
     }
 
+    K1Iterator(ArrayList<String> myList, String myTitle, boolean random) {
+        list = myList; 
+        title = myTitle;
+        if (random)
+           randomize(); 
+        counter = 0;
+        next();
+    }
+
+
     // To be used to get the Title of the JFrame
     public String getTitle() {
         return title;
+    }
+
+    public void randomize() {
+        Collections.shuffle(list);
     }
 
     // To be used to get the current question.

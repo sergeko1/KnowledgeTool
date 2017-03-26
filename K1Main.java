@@ -3,15 +3,20 @@ import java.util.ArrayList;
 public class K1Main {
 
    public static void main(String[] args) {
+
       // Build the JFrame with the K1Iterator to process the interactions 
-      if (args.length == 1)
-        buildFrame(new K1Iterator(readFile(args[0]), args[0])) ;
-      else 
-        buildFrame(new K1Iterator(readFile("Files/default.txt"), "Files/default.txt")) ;
+      boolean random = true;
+
+      String fileName = (args.length==1)?args[0]:"Files/default.txt";
+
+      ArrayList<String> list = readFile(fileName);
+
+      buildFrame(new K1Iterator(list, fileName, random)) ;
    } // main end
 
    // Method to build the main program JFrame
    static void buildFrame(K1Iterator iterator) {
+
        K1JFrame k1JFrame = new K1JFrame(iterator);
        k1JFrame.setDefaultCloseOperation(K1JFrame.EXIT_ON_CLOSE);
        k1JFrame.setSize(800,500);
@@ -24,6 +29,5 @@ public class K1Main {
       reader.openFile(file);
       return reader.readRecordsToArrayList();
    }
-
 
 }// Class end
