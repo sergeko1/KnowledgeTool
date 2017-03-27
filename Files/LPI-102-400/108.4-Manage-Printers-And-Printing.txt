@@ -1,0 +1,4 @@
+A programming language oriented toward the goal of producing a printed page@PostScript
+A PostScript interpreter that runs on a computer@Ghostscript
+PostScript printer definition@PPD
+Internet Printing Protocol@IPP

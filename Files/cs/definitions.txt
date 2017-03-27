@@ -1,0 +1,2 @@
+Linux@A Unix-like computer operating system assembled under the model of free and open-source software development and distribution
+Opearting System@A system software that manages computer hardware and software resources and provides common services for computer programs

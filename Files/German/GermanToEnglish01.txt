@@ -6,3 +6,6 @@ die Verwirrung@confusion
 die Suche@search
 empfehlen@recommend
 der Durchbruch@breakthrough
+entwikeln@develop
+die Schwierigkeit@trouble
+das Mitglied@member
