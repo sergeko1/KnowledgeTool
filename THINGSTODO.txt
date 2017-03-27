@@ -1,8 +1,12 @@
+
 OK - add the name of the file being read on the top of the main window.
 OK - gets the file to be read from command line.
 OK - possibility of having a random generated list of question from the chosen file.
 OK - add a correct wrong answer summary
 
+- add a file select window
 - start working on stats
 - multiple answer questions
-- 
+- text to speech
+- wrong answers review
+
