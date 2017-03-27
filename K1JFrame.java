@@ -21,7 +21,7 @@ public class K1JFrame extends JFrame implements ActionListener {
    public K1JFrame(K1Iterator myIterator) {
       super (myIterator.getTitle()); // Gets The window title from the Iterator
       iterator = myIterator; // myIterator assigned to iterator in instance 
-      statsWriter = new K1StatsWriter(iterator.size());
+      statsWriter = new K1StatsWriter(iterator.size(), myIterator.getTitle());
       addContent(); // adds JButtons and JTextFields to the JFrame
 
    }
@@ -52,6 +52,8 @@ public class K1JFrame extends JFrame implements ActionListener {
             jTextFieldNorth.setText("");
             jTextFieldSouth.setText("");
             jTextAreaCenter.setText("The test is finished");
+            statsWriter.writeToFile();
+            jTextFieldSouth.removeActionListener(this);
          }
 
          // statsWriter.printTotal(); // sets the correct Icon

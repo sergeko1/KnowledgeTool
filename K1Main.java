@@ -5,13 +5,9 @@ public class K1Main {
    public static void main(String[] args) {
 
       // Build the JFrame with the K1Iterator to process the interactions 
-      boolean random = true;
-
+      boolean random = true; // randomize questions
       String fileName = (args.length==1)?args[0]:"Files/default.txt";
-
-      ArrayList<String> list = readFile(fileName);
-
-      buildFrame(new K1Iterator(list, fileName, random)) ;
+      buildFrame(new K1Iterator(readFile(fileName), fileName, random)) ;
    } // main end
 
    // Method to build the main program JFrame

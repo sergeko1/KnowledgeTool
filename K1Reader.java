@@ -26,6 +26,4 @@ public class K1Reader {
       }
       return lines;
    } 
-
 }
-
