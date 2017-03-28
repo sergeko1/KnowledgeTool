@@ -1,1 +1,1 @@
-accounts@data structures and procedures used to identify individual users of a computer.
+accounts@Data structures and procedures used to identify individual users of a computer

@@ -37,7 +37,8 @@ public class K1StatsWriter {
    void writeToFile() {
       BufferedWriter out = null;
       try {
-          FileWriter fstream = new FileWriter("out.txt", true); // true tells to apend
+          String[] splitted = fileName.split(".*/");
+          FileWriter fstream = new FileWriter("stats/"+splitted[1]+".stats",true); // true tells to append
           out = new BufferedWriter(fstream);
           out.write(String.format("%s;%d;%d;%d\n",fileName,wrongAnswers,rightAnswers,totQuestions));
       } catch (IOException e){

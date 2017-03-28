@@ -15,7 +15,7 @@ public class K1Main {
 
        K1JFrame k1JFrame = new K1JFrame(iterator);
        k1JFrame.setDefaultCloseOperation(K1JFrame.EXIT_ON_CLOSE);
-       k1JFrame.setSize(800,500);
+       k1JFrame.setSize(1000,500);
        //k1JFrame.setExtendedState(K1JFrame.MAXIMIZED_BOTH); 
        k1JFrame.setVisible(true);
    } // end of buildFrame method

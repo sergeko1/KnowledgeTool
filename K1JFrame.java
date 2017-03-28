@@ -9,7 +9,7 @@ public class K1JFrame extends JFrame implements ActionListener {
    private JButton buttonWest;
    private JTextField jTextFieldNorth;
    private JTextField jTextFieldSouth;
-   private JTextArea jTextAreaCenter;
+   private JTextArea jTextAreaWest;
    private Font myFont;
    private K1StatsWriter statsWriter;
 
@@ -35,25 +35,27 @@ public class K1JFrame extends JFrame implements ActionListener {
             //buttonEast.setText(""+(counter+1)+"/"+iterator.size()+"\n"+statsWriter.printTotalString());
             iterator.next();
             jTextFieldNorth.setText(iterator.getQuestion());
-            jTextAreaCenter.setText("");
+            jTextAreaWest.setText("");
             jTextFieldSouth.setText("");
             checkAnswer = true;
             setIcon("img/question.png"); // sets the question icon
             jTextAreaEast.setText(statsWriter.printTotalString()+"\n"+"Progression:"+(counter+1)+"/"+iterator.size()+"\n");
          } else if ( checkAnswer ){
             boolean response = iterator.checkAnswer(jTextFieldSouth.getText());
-            jTextAreaCenter.setText("The answer entered is "+jTextFieldSouth.getText()+"\nThe answer is:"+iterator.getAnswer());
+            jTextAreaWest.setText("User Answer :"+jTextFieldSouth.getText()+"\nRight Answer:"+iterator.getAnswer());
             setIcon((response)?"img/OK.png":"img/NotOK.png"); // sets the correct Icon
-            statsWriter.add(response); // sets the correct Icon
+            statsWriter.add(response); // adds the answer 
             jTextAreaEast.setText(statsWriter.printTotalString()+"\n"+"Progression:"+(counter+1)+"/"+iterator.size()+"\n");
             counter++;
             checkAnswer = false;
          } else if (counter == iterator.size()) {
             jTextFieldNorth.setText("");
             jTextFieldSouth.setText("");
-            jTextAreaCenter.setText("The test is finished");
+            jTextAreaWest.setText("The test is finished");
             statsWriter.writeToFile();
             jTextFieldSouth.removeActionListener(this);
+            setIcon("img/End.png");
+            buttonWest.addActionListener(this);
          }
 
          // statsWriter.printTotal(); // sets the correct Icon
@@ -63,20 +65,25 @@ public class K1JFrame extends JFrame implements ActionListener {
          this.repaint();
       }
 
+      // allows closing the window with the button a the end of the test
+      if (event.getSource() == buttonWest) { 
+         System.exit(0);
+      }
+
    } // end method actionPerformed
 
 
    public void addContent() {
 
-      myFont = new Font("Courier", Font.BOLD,18);
+      myFont = new Font("Courier", Font.BOLD,14);
 
       //jTextAreaEast = new JTextArea("1"+"/"+iterator.size());
-      jTextAreaEast = new JTextArea(statsWriter.printTotalString()+"\n"+"Progression:"+(counter+1)+"/"+iterator.size()+"\n");
+      jTextAreaEast = new JTextArea(statsWriter.printTotalString()+"\n"+"Progression:"+(counter+1)+"/"+iterator.size()+"\n",40,20);
       jTextAreaEast.setFont(new Font("Courier", Font.BOLD,14));
       jTextAreaEast.setEditable(false);
+      jTextAreaEast.setLineWrap(true);
 
       buttonWest = new JButton();
-      buttonWest.addActionListener(this);
 
       jTextFieldNorth = new JTextField();
       jTextFieldNorth.setText(iterator.getQuestion());
@@ -86,23 +93,24 @@ public class K1JFrame extends JFrame implements ActionListener {
       jTextFieldSouth = new JTextField();
       jTextFieldSouth.addActionListener(this);
 
-      jTextAreaCenter = new JTextArea();
-      jTextAreaCenter.setFont(myFont);
-      jTextAreaCenter.setEditable(false);
+      jTextAreaWest = new JTextArea(40,80);
+      jTextAreaWest.setFont(myFont);
+      jTextAreaWest.setEditable(false);
+      jTextAreaWest.setLineWrap(true);
+
 
       add(jTextFieldSouth, BorderLayout.SOUTH);
-      add(jTextAreaEast, BorderLayout.EAST);
-      add(buttonWest, BorderLayout.WEST);
+      add(jTextAreaEast, BorderLayout.CENTER);
+      add(buttonWest, BorderLayout.EAST);
       add(jTextFieldNorth, BorderLayout.NORTH);
-      add(jTextAreaCenter, BorderLayout.CENTER);
+      add(jTextAreaWest, BorderLayout.WEST);
       setIcon("img/question.png"); // sets the question icon
    
    }
 
    public void setIcon(String iconFile) {
       try {
-         //Image img = ImageIO.read(getClass().getResource(iconFile));
-         buttonWest.setIcon(new ImageIcon(ImageIO.read(getClass().getResource(iconFile))));
+         buttonWest.setIcon(new ImageIcon(iconFile));
       } catch (Exception ex) {
          System.out.println(ex);
       }

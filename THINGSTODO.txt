@@ -9,4 +9,10 @@ OK - add a correct wrong answer summary
 - multiple answer questions
 - text to speech
 - wrong answers review
-
+- timestamp
+- a stat file for each questions file
+- button to close window
+- add start time , end time elapsed time to the stats
+- questions with multiple answers possible
+- add correct and wrong audio
+- add records in speed and results 
