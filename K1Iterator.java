@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Collections;
 
 public class K1Iterator {
@@ -8,34 +11,30 @@ public class K1Iterator {
     private String answer;   
     private String title;   
     private int counter;
+    boolean random = false;
 
     // Constructor
-    K1Iterator(ArrayList<String> myList, String myTitle) {
-        list = myList; 
-        title = myTitle;
+    K1Iterator(String fileName) {
+        readFile(fileName); 
+        title = fileName;
+        if (random) 
+           randomize();
         counter = 0;
         next();
     }
 
-    K1Iterator(ArrayList<String> myList, String myTitle, boolean random) {
-        list = myList; 
-        title = myTitle;
-        if (random)
-           randomize(); 
-        counter = 0;
-        next();
+    K1Iterator(String fileName, boolean myRandom) {
+       this(fileName);
+       random = myRandom;
     }
-
 
     // To be used to get the Title of the JFrame
     public String getTitle() {
         return title;
     }
-
     public void randomize() {
         Collections.shuffle(list);
     }
-
     // To be used to get the current question.
     public String getQuestion() {
         return question;
@@ -67,6 +66,25 @@ public class K1Iterator {
        return list.size();
     }
 
+
+
+   // Opens the file for reading
+   void readFile(String file) {
+      Scanner input;
+      try {
+         input = new Scanner(new File(file));
+         list = new ArrayList<String>();
+         while (input.hasNextLine()) {
+            list.add(input.nextLine());
+         }
+      }
+      catch (FileNotFoundException fileNotFoundException) {
+          System.err.println("Error opening File");
+          System.exit(1);
+      }
+   }
+
+   
     // The Iterator moves to the next answer.
     public void next() {
        String[] splitted = list.get(counter).split("@");

@@ -20,6 +20,11 @@ public class K1JFrame extends JFrame implements ActionListener {
 
    public K1JFrame(K1Iterator myIterator) {
       super (myIterator.getTitle()); // Gets The window title from the Iterator
+      this.setDefaultCloseOperation(K1JFrame.EXIT_ON_CLOSE);
+      this.setSize(1000,500);
+      this.setVisible(true);
+
+
       iterator = myIterator; // myIterator assigned to iterator in instance 
       statsWriter = new K1StatsWriter(iterator.size(), myIterator.getTitle());
       addContent(); // adds JButtons and JTextFields to the JFrame
@@ -39,12 +44,16 @@ public class K1JFrame extends JFrame implements ActionListener {
             jTextFieldSouth.setText("");
             checkAnswer = true;
             setIcon("img/question.png"); // sets the question icon
+            statsWriter.setEndTime();
             jTextAreaEast.setText(statsWriter.printTotalString()+"\n"+"Progression:"+(counter+1)+"/"+iterator.size()+"\n");
          } else if ( checkAnswer ){
             boolean response = iterator.checkAnswer(jTextFieldSouth.getText());
             jTextAreaWest.setText("User Answer :"+jTextFieldSouth.getText()+"\nRight Answer:"+iterator.getAnswer());
             setIcon((response)?"img/OK.png":"img/NotOK.png"); // sets the correct Icon
             statsWriter.add(response); // adds the answer 
+            if (counter==0)  
+               statsWriter.setStartTime();
+            statsWriter.setEndTime();
             jTextAreaEast.setText(statsWriter.printTotalString()+"\n"+"Progression:"+(counter+1)+"/"+iterator.size()+"\n");
             counter++;
             checkAnswer = false;
@@ -52,10 +61,12 @@ public class K1JFrame extends JFrame implements ActionListener {
             jTextFieldNorth.setText("");
             jTextFieldSouth.setText("");
             jTextAreaWest.setText("The test is finished");
-            statsWriter.writeToFile();
             jTextFieldSouth.removeActionListener(this);
             setIcon("img/End.png");
             buttonWest.addActionListener(this);
+            statsWriter.setEndTime();
+            statsWriter.writeToFile();
+            //System.out.println("Time Difference" + ((double)(endTime-startTime)/1000000000));
          }
 
          // statsWriter.printTotal(); // sets the correct Icon
