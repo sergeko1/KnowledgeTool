@@ -5,7 +5,7 @@ import javax.swing.*;
 
 public class K1JFrame extends JFrame implements ActionListener {
   // private JButton buttonEast;
-   private JTextArea jTextAreaEast;
+   private JTextArea jTextAreaCenter;
    private JButton buttonWest;
    private JTextField jTextFieldNorth;
    private JTextField jTextFieldSouth;
@@ -21,20 +21,18 @@ public class K1JFrame extends JFrame implements ActionListener {
    public K1JFrame(K1Iterator myIterator) {
       super (myIterator.getTitle()); // Gets The window title from the Iterator
       this.setDefaultCloseOperation(K1JFrame.EXIT_ON_CLOSE);
-      this.setSize(1000,500);
+      this.setSize(1200,500);
       this.setVisible(true);
-
-
       iterator = myIterator; // myIterator assigned to iterator in instance 
       statsWriter = new K1StatsWriter(iterator.size(), myIterator.getTitle());
+      statsWriter.setStartTime();
+      statsWriter.setEndTimeAsStartTime();
       addContent(); // adds JButtons and JTextFields to the JFrame
-
    }
    
    public void actionPerformed(ActionEvent event) {
 
       if (event.getSource() == jTextFieldSouth && counter <= iterator.size()) {
-
          // Logic to handle the list of question within a the JFrame
          if (iterator.hasNext() && !checkAnswer) { 
             //buttonEast.setText(""+(counter+1)+"/"+iterator.size()+"\n"+statsWriter.printTotalString());
@@ -45,16 +43,14 @@ public class K1JFrame extends JFrame implements ActionListener {
             checkAnswer = true;
             setIcon("img/question.png"); // sets the question icon
             statsWriter.setEndTime();
-            jTextAreaEast.setText(statsWriter.printTotalString()+"\n"+"Progression:"+(counter+1)+"/"+iterator.size()+"\n");
+            jTextAreaCenter.setText(statsWriter.printTotalString()+"\n"+"Progression:"+(counter+1)+"/"+iterator.size()+"\n");
          } else if ( checkAnswer ){
             boolean response = iterator.checkAnswer(jTextFieldSouth.getText());
             jTextAreaWest.setText("User Answer :"+jTextFieldSouth.getText()+"\nRight Answer:"+iterator.getAnswer());
             setIcon((response)?"img/OK.png":"img/NotOK.png"); // sets the correct Icon
             statsWriter.add(response); // adds the answer 
-            if (counter==0)  
-               statsWriter.setStartTime();
             statsWriter.setEndTime();
-            jTextAreaEast.setText(statsWriter.printTotalString()+"\n"+"Progression:"+(counter+1)+"/"+iterator.size()+"\n");
+            jTextAreaCenter.setText(statsWriter.printTotalString()+"\n"+"Progression:"+(counter+1)+"/"+iterator.size()+"\n");
             counter++;
             checkAnswer = false;
          } else if (counter == iterator.size()) {
@@ -64,9 +60,10 @@ public class K1JFrame extends JFrame implements ActionListener {
             jTextFieldSouth.removeActionListener(this);
             setIcon("img/End.png");
             buttonWest.addActionListener(this);
-            statsWriter.setEndTime();
+           // System.out.println(statsWriter.getLastRecordFromStatFile(iterator.getTitle()));
+            statsWriter.highestScoreFromStatFile();
+            jTextAreaCenter.setText(statsWriter.printTotalString()+"\n"+"Progression:"+iterator.size()+"/"+iterator.size()+"\n");
             statsWriter.writeToFile();
-            //System.out.println("Time Difference" + ((double)(endTime-startTime)/1000000000));
          }
 
          // statsWriter.printTotal(); // sets the correct Icon
@@ -88,11 +85,11 @@ public class K1JFrame extends JFrame implements ActionListener {
 
       myFont = new Font("Courier", Font.BOLD,14);
 
-      //jTextAreaEast = new JTextArea("1"+"/"+iterator.size());
-      jTextAreaEast = new JTextArea(statsWriter.printTotalString()+"\n"+"Progression:"+(counter+1)+"/"+iterator.size()+"\n",40,20);
-      jTextAreaEast.setFont(new Font("Courier", Font.BOLD,14));
-      jTextAreaEast.setEditable(false);
-      jTextAreaEast.setLineWrap(true);
+      //jTextAreaCenter = new JTextArea("1"+"/"+iterator.size());
+      jTextAreaCenter = new JTextArea(statsWriter.printTotalString()+"\n"+"Progression:"+(counter+1)+"/"+iterator.size()+"\n",40,30);
+      jTextAreaCenter.setFont(new Font("Courier", Font.BOLD,14));
+      jTextAreaCenter.setEditable(false);
+      jTextAreaCenter.setLineWrap(true);
 
       buttonWest = new JButton();
 
@@ -104,14 +101,14 @@ public class K1JFrame extends JFrame implements ActionListener {
       jTextFieldSouth = new JTextField();
       jTextFieldSouth.addActionListener(this);
 
-      jTextAreaWest = new JTextArea(40,80);
+      jTextAreaWest = new JTextArea(40,90);
       jTextAreaWest.setFont(myFont);
       jTextAreaWest.setEditable(false);
       jTextAreaWest.setLineWrap(true);
 
 
       add(jTextFieldSouth, BorderLayout.SOUTH);
-      add(jTextAreaEast, BorderLayout.CENTER);
+      add(jTextAreaCenter, BorderLayout.CENTER);
       add(buttonWest, BorderLayout.EAST);
       add(jTextFieldNorth, BorderLayout.NORTH);
       add(jTextAreaWest, BorderLayout.WEST);
