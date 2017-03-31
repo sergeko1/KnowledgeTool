@@ -75,7 +75,6 @@ public class K1StatsWriter {
       }
    }
 
-
    // gets the last record from the stats File
    public void highestScoreFromStatFile() {
        float sessionTime = ((float)(endTime-startTime))/1000000000; 
