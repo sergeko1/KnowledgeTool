@@ -1,11 +1,11 @@
-
 OK - add the name of the file being read on the top of the main window.
 OK - gets the file to be read from command line.
 OK - possibility of having a random generated list of question from the chosen file.
 OK - add a correct wrong answer summary
 
+- to set the RECORD comper to previous record each time 
+
 - add a file select window
-- start working on stats
 - multiple answer questions
 - text to speech
 - wrong answers review
@@ -13,6 +13,7 @@ OK - add a correct wrong answer summary
 - a stat file for each questions file
 - button to close window
 - add start time , end time elapsed time to the stats
-- questions with multiple answers possible
+- questions with multiple possible answers
 - add correct and wrong audio
 - add records in speed and results 
+- open file within the Iterator class, take out openFile() from main K1Reader used directly on K1Iterator
