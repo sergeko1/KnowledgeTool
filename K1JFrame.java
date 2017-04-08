@@ -6,14 +6,17 @@ import javax.swing.*;
 public class K1JFrame extends JFrame implements ActionListener {
   // private JButton buttonEast;
    private JTextArea jTextAreaCenter;
-   private JButton buttonWest;
+   private JButton buttonEast1;
+   private JButton buttonEast2;
    private JTextField jTextFieldNorth;
    private JTextField jTextFieldSouth;
    private JTextArea jTextAreaWest;
    private Font myFont;
    private K1StatsWriter statsWriter;
+   boolean response = false;
 
    //private BorderLayout layout;
+   //private GridLayout gridLayout;
    int counter = 0;
    boolean checkAnswer = true;
    K1Iterator iterator ;
@@ -32,69 +35,63 @@ public class K1JFrame extends JFrame implements ActionListener {
    
    public void actionPerformed(ActionEvent event) {
 
-      if (event.getSource() == jTextFieldSouth && counter <= iterator.size()) {
-         // Logic to handle the list of question within a the JFrame
+      if (event.getSource() == buttonEast2 && checkAnswer==true && buttonEast2.getText().equals("Next") && counter<=iterator.size()) {
+           System.out.println("inside next");
+           event=new ActionEvent(jTextFieldSouth,1,"");
+       }
+
+        if (event.getSource() == jTextFieldSouth && counter <= iterator.size()) {
          if (iterator.hasNext() && !checkAnswer) { 
-            //buttonEast.setText(""+(counter+1)+"/"+iterator.size()+"\n"+statsWriter.printTotalString());
             iterator.next();
-            jTextFieldNorth.setText(iterator.getQuestion());
-            jTextAreaWest.setText("");
-            jTextFieldSouth.setText("");
-            checkAnswer = true;
-            setIcon("img/question.png"); // sets the question icon
-            statsWriter.setEndTime();
-            jTextAreaCenter.setText(statsWriter.printTotalString()+"\n"+"Progression:"+(counter+1)+"/"+iterator.size()+"\n");
+            generateQuestion();
          } else if ( checkAnswer ){
-            boolean response = iterator.checkAnswer(jTextFieldSouth.getText());
-            jTextAreaWest.setText("User Answer :"+jTextFieldSouth.getText()+"\nRight Answer:"+iterator.getAnswer());
-            setIcon((response)?"img/OK.png":"img/NotOK.png"); // sets the correct Icon
-            statsWriter.add(response); // adds the answer 
-            statsWriter.setEndTime();
-            jTextAreaCenter.setText(statsWriter.printTotalString()+"\n"+"Progression:"+(counter+1)+"/"+iterator.size()+"\n");
-            counter++;
-            checkAnswer = false;
+            generateResponse();
          } else if (counter == iterator.size()) {
-            jTextFieldNorth.setText("");
-            jTextFieldSouth.setText("");
-            jTextAreaWest.setText("The test is finished");
-            jTextFieldSouth.removeActionListener(this);
-            setIcon("img/End.png");
-            buttonWest.addActionListener(this);
-           // System.out.println(statsWriter.getLastRecordFromStatFile(iterator.getTitle()));
-            statsWriter.highestScoreFromStatFile();
-            jTextAreaCenter.setText(statsWriter.printTotalString()+"\n"+"Progression:"+iterator.size()+"/"+iterator.size()+"\n");
-            statsWriter.writeToFile();
+            finalPage();
          }
 
-         // statsWriter.printTotal(); // sets the correct Icon
-         // reload JFrame
-         this.invalidate();
-         this.validate();
-         this.repaint();
+      }
+
+
+      // repeat a question with the repeat button
+      if (event.getSource() == buttonEast2 && checkAnswer==false && counter<=iterator.size() && buttonEast2.getText().equals("Repeat")) { 
+
+          System.out.println("response " + response);
+          if (response)
+             statsWriter.rightAnswers--;  
+           else
+             statsWriter.wrongAnswers--;  
+           counter--;
+          generateQuestion();
+          event=new ActionEvent(jTextFieldSouth,1,"");
       }
 
       // allows closing the window with the button a the end of the test
-      if (event.getSource() == buttonWest) { 
+      if (event.getSource() == buttonEast1 || event.getSource() == buttonEast2) { 
          System.exit(0);
       }
 
+      this.invalidate();
+      this.validate();
+      this.repaint();
    } // end method actionPerformed
 
 
    public void addContent() {
+      JPanel eastPanel = new JPanel(new GridLayout(2,1));
 
       myFont = new Font("Courier", Font.BOLD,14);
 
       //jTextAreaCenter = new JTextArea("1"+"/"+iterator.size());
-      jTextAreaCenter = new JTextArea(statsWriter.printTotalString()+"\n"+"Progression:"+(counter+1)+"/"+iterator.size()+"\n",40,30);
+      jTextAreaCenter = new JTextArea();
       jTextAreaCenter.setFont(new Font("Courier", Font.BOLD,14));
       jTextAreaCenter.setEditable(false);
       jTextAreaCenter.setLineWrap(true);
 
-      buttonWest = new JButton();
+      buttonEast1 = new JButton();
+      buttonEast2 = new JButton("Repeat");
 
       jTextFieldNorth = new JTextField();
-      jTextFieldNorth.setText(iterator.getQuestion());
       jTextFieldNorth.setFont(myFont);
       jTextFieldNorth.setEditable(false);
 
@@ -106,19 +103,63 @@ public class K1JFrame extends JFrame implements ActionListener {
       jTextAreaWest.setEditable(false);
       jTextAreaWest.setLineWrap(true);
 
+      eastPanel.add(buttonEast1);
+      eastPanel.add(buttonEast2);
+      buttonEast2.addActionListener(this);
 
       add(jTextFieldSouth, BorderLayout.SOUTH);
       add(jTextAreaCenter, BorderLayout.CENTER);
-      add(buttonWest, BorderLayout.EAST);
+      add(eastPanel, BorderLayout.EAST);
       add(jTextFieldNorth, BorderLayout.NORTH);
       add(jTextAreaWest, BorderLayout.WEST);
-      setIcon("img/question.png"); // sets the question icon
+
+      generateQuestion();
    
+   }
+
+
+   public void generateQuestion() {
+       System.out.println("Generate Question");
+       buttonEast2.setText("Next");
+       jTextFieldNorth.setText(iterator.getQuestion());
+       jTextAreaWest.setText("");
+       jTextFieldSouth.setText("");
+       checkAnswer = true;
+       setIcon("img/question.png"); // sets the question icon
+       statsWriter.setEndTime();
+       jTextAreaCenter.setText(statsWriter.printTotalString()+"\n"+"Progression:"+(counter+1)+"/"+iterator.size()+"\n");
+   }
+
+
+   public void generateResponse() {
+       System.out.println("Generate Response");
+       buttonEast2.setText("Repeat");
+       response = iterator.checkAnswer(jTextFieldSouth.getText());
+       jTextAreaWest.setText("User Answer :"+jTextFieldSouth.getText()+"\nRight Answer:"+iterator.getAnswer());
+       setIcon((response)?"img/OK.png":"img/NotOK.png"); // sets the correct Icon
+       statsWriter.add(response); // adds the answer 
+       statsWriter.setEndTime();
+       jTextAreaCenter.setText(statsWriter.printTotalString()+"\n"+"Progression:"+(counter+1)+"/"+iterator.size()+"\n");
+       checkAnswer = false;
+       counter++;
+   }
+
+   public void finalPage() {
+       buttonEast2.setText("End");
+       jTextFieldNorth.setText("");
+       jTextFieldSouth.setText("");
+       jTextAreaWest.setText("The test is finished");
+       jTextFieldSouth.removeActionListener(this);
+       setIcon("img/End.png");
+       buttonEast1.addActionListener(this);
+       statsWriter.highestScoreFromStatFile();
+       jTextAreaCenter.setText(statsWriter.printTotalString()+"\n"+"Progression:"+iterator.size()+"/"+iterator.size()+"\n");
+       statsWriter.writeToFile();
    }
 
    public void setIcon(String iconFile) {
       try {
-         buttonWest.setIcon(new ImageIcon(iconFile));
+         buttonEast1.setIcon(new ImageIcon(iconFile));
       } catch (Exception ex) {
          System.out.println(ex);
       }

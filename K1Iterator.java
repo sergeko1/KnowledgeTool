@@ -108,7 +108,6 @@ public class K1Iterator {
 
 
 
-
     // The Iterator moves to the next answer.
     public void next() {
        String[] splitted = list.get(counter).split("@");
@@ -117,5 +116,11 @@ public class K1Iterator {
        counter++;
     } // end of next()
 
+     public void previous() {
+       counter --;
+       String[] splitted = list.get(counter).split("@");
+       question = splitted[0];
+       answer = splitted[1];
+    } 
 } // end of Class
 

@@ -97,7 +97,7 @@ public class K1StatsWriter {
           answersHighestScore = rightAnswers;
           timeHighestScore = sessionTime; 
        }
-       highScoreString = "\n"+"New High Score right answers:"+rightAnswers+"\nTime: "+sessionTime;
+       highScoreString = "\n"+"High Score right answers:"+answersHighestScore+"\nTime: "+timeHighestScore;
    }
 
    public void setHighestScoresString() {
@@ -115,8 +115,8 @@ public class K1StatsWriter {
 
    // builds the stats filename String
    public String getStatsFileName(String fileName) {
-       String[] splitted = fileName.split(".*/");
-       return "stats/"+splitted[1]+".stats";
-   } 
+       //String[] splitted = fileName.split(".*/");
+       return fileName+".stats";
+   }
    
 }

@@ -3,8 +3,8 @@ OK - gets the file to be read from command line.
 OK - possibility of having a random generated list of question from the chosen file.
 OK - add a correct wrong answer summary
 
-- to set the RECORD comper to previous record each time 
 
+- stop counter
 - add a file select window
 - multiple answer questions
 - text to speech
@@ -16,4 +16,19 @@ OK - add a correct wrong answer summary
 - questions with multiple possible answers
 - add correct and wrong audio
 - add records in speed and results 
-- open file within the Iterator class, take out openFile() from main K1Reader used directly on K1Iterator
+- aggiungi il tasto repeat
+- build a different frame for question page/answer page/final page.
+- repositioning objects as the window resizes (see Toolkit).
+- allow repeat when the answer is wrong
+- frequency on the single question
+- force as OK answer
+- add a unique record for each question
+- add tags to a question
+
+
+IDEAS
+ -- add a frequency tool when and allow selecting a subset of the questions
+
+
+KNOWN BUGS
+SOLVED - with a single line file the stats are not working correctly : esample a single wrong question gets a record
