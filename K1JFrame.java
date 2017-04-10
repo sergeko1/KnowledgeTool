@@ -2,6 +2,10 @@ import java.awt.*;
 import java.awt.event.*; 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.io.File;
+import java.io.IOException;
+import javax.sound.sampled.*;
+
 
 public class K1JFrame extends JFrame implements ActionListener {
   // private JButton buttonEast;
@@ -23,7 +27,7 @@ public class K1JFrame extends JFrame implements ActionListener {
 
    public K1JFrame(K1Iterator myIterator) {
       super (myIterator.getTitle()); // Gets The window title from the Iterator
-      this.setDefaultCloseOperation(K1JFrame.EXIT_ON_CLOSE);
+      this.setDefaultCloseOperation(K0JFrame.EXIT_ON_CLOSE);
       this.setSize(1200,500);
       this.setVisible(true);
       iterator = myIterator; // myIterator assigned to iterator in instance 
@@ -127,7 +131,7 @@ public class K1JFrame extends JFrame implements ActionListener {
        checkAnswer = true;
        setIcon("img/question.png"); // sets the question icon
        statsWriter.setEndTime();
-       jTextAreaCenter.setText(statsWriter.printTotalString()+"\n"+"Progression:"+(counter+1)+"/"+iterator.size()+"\n");
+       jTextAreaCenter.setText(statsWriter.printTotalString()+"\n"+"\nProgression:"+(counter+1)+"/"+iterator.size()+"\n");
    }
 
 
@@ -137,9 +141,10 @@ public class K1JFrame extends JFrame implements ActionListener {
        response = iterator.checkAnswer(jTextFieldSouth.getText());
        jTextAreaWest.setText("User Answer :"+jTextFieldSouth.getText()+"\nRight Answer:"+iterator.getAnswer());
        setIcon((response)?"img/OK.png":"img/NotOK.png"); // sets the correct Icon
+       play((response)?"snd/OK.wav":"snd/NotOK.wav"); // sets the correct Icon
        statsWriter.add(response); // adds the answer 
        statsWriter.setEndTime();
-       jTextAreaCenter.setText(statsWriter.printTotalString()+"\n"+"Progression:"+(counter+1)+"/"+iterator.size()+"\n");
+       jTextAreaCenter.setText(statsWriter.printTotalString()+"\n"+"\nProgression:"+(counter+1)+"/"+iterator.size()+"\n");
        checkAnswer = false;
        counter++;
    }
@@ -153,7 +158,7 @@ public class K1JFrame extends JFrame implements ActionListener {
        setIcon("img/End.png");
        buttonEast1.addActionListener(this);
        statsWriter.highestScoreFromStatFile();
-       jTextAreaCenter.setText(statsWriter.printTotalString()+"\n"+"Progression:"+iterator.size()+"/"+iterator.size()+"\n");
+       jTextAreaCenter.setText(statsWriter.printTotalString()+"\n"+"\nProgression:"+iterator.size()+"/"+iterator.size()+"\n");
        statsWriter.writeToFile();
    }
 
@@ -164,4 +169,26 @@ public class K1JFrame extends JFrame implements ActionListener {
          System.out.println(ex);
       }
    }
+
+
+    //public void play(String file) throws LineUnavailableException, UnsupportedAudioFileException, IOException
+    public void play(String file) 
+    {
+
+    try 
+        {   
+            AudioInputStream inputStream = AudioSystem.getAudioInputStream(this.getClass().getResource(file));
+            AudioFormat format = inputStream.getFormat();
+            DataLine.Info info = new DataLine.Info(Clip.class, format);
+            Clip clip = (Clip)AudioSystem.getLine(info);
+            clip.open(inputStream);
+            clip.start();
+        }
+
+    catch (IOException | LineUnavailableException | UnsupportedAudioFileException e1)
+        {
+            e1.printStackTrace();
+        }
+    }
+
 } // end class

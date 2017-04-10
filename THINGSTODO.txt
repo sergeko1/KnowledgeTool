@@ -28,6 +28,12 @@ OK - add a correct wrong answer summary
 
 IDEAS
  -- add a frequency tool when and allow selecting a subset of the questions
+ -- all type of questions:
+    multiple choice
+    yes or no
+    self review
+    written text
+    audio
 
 
 KNOWN BUGS

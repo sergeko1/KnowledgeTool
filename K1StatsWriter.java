@@ -105,12 +105,10 @@ public class K1StatsWriter {
        if (myFile.exists()) {
            ArrayList<String> arrayList = K1Iterator.readFileArrayList(fileName);
            String[] fields = arrayList.get(arrayList.size()-1).split(";"); 
-           int answersHighestScore = Integer.parseInt(fields[6]);
-           float timeHighestScore = Float.parseFloat(fields[7]);
-           oldHighScoreString = "\nMax Answers "+answersHighestScore+"\nLowest Time "+timeHighestScore;
-       } else {
-           oldHighScoreString = "\nMax Answers "+answersHighestScore+"\nLowest Time "+timeHighestScore;
-       }
+           answersHighestScore = Integer.parseInt(fields[6]);
+           timeHighestScore = Float.parseFloat(fields[7]);
+       } 
+       oldHighScoreString = "\n\nMax Answers "+answersHighestScore+"\nLowest Time "+timeHighestScore;
    }
 
    // builds the stats filename String
