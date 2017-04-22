@@ -12,7 +12,7 @@ public class K1JFrame extends JFrame implements ActionListener {
    private JTextArea jTextAreaCenter;
    private JButton buttonEast1;
    private JButton buttonEast2;
-   private JTextField jTextFieldNorth;
+   private JTextArea jTextAreaNorth;
    private JTextField jTextFieldSouth;
    private JTextArea jTextAreaWest;
    private Font myFont;
@@ -27,7 +27,7 @@ public class K1JFrame extends JFrame implements ActionListener {
 
    public K1JFrame(K1Iterator myIterator) {
       super (myIterator.getTitle()); // Gets The window title from the Iterator
-      this.setDefaultCloseOperation(K0JFrame.EXIT_ON_CLOSE);
+      this.setDefaultCloseOperation(K1JFrame.EXIT_ON_CLOSE);
       this.setSize(1200,500);
       this.setVisible(true);
       iterator = myIterator; // myIterator assigned to iterator in instance 
@@ -55,7 +55,6 @@ public class K1JFrame extends JFrame implements ActionListener {
          }
 
       }
-
 
       // repeat a question with the repeat button
       if (event.getSource() == buttonEast2 && checkAnswer==false && counter<=iterator.size() && buttonEast2.getText().equals("Repeat")) { 
@@ -95,9 +94,10 @@ public class K1JFrame extends JFrame implements ActionListener {
       buttonEast1 = new JButton();
       buttonEast2 = new JButton("Repeat");
 
-      jTextFieldNorth = new JTextField();
-      jTextFieldNorth.setFont(myFont);
-      jTextFieldNorth.setEditable(false);
+      jTextAreaNorth = new JTextArea();
+      jTextAreaNorth.setFont(myFont);
+      jTextAreaNorth.setEditable(false);
+      jTextAreaNorth.setLineWrap(true);
 
       jTextFieldSouth = new JTextField();
       jTextFieldSouth.addActionListener(this);
@@ -114,7 +114,7 @@ public class K1JFrame extends JFrame implements ActionListener {
       add(jTextFieldSouth, BorderLayout.SOUTH);
       add(jTextAreaCenter, BorderLayout.CENTER);
       add(eastPanel, BorderLayout.EAST);
-      add(jTextFieldNorth, BorderLayout.NORTH);
+      add(jTextAreaNorth, BorderLayout.NORTH);
       add(jTextAreaWest, BorderLayout.WEST);
 
       generateQuestion();
@@ -125,7 +125,7 @@ public class K1JFrame extends JFrame implements ActionListener {
    public void generateQuestion() {
        System.out.println("Generate Question");
        buttonEast2.setText("Next");
-       jTextFieldNorth.setText(iterator.getQuestion());
+       jTextAreaNorth.setText(iterator.getQuestion());
        jTextAreaWest.setText("");
        jTextFieldSouth.setText("");
        checkAnswer = true;
@@ -151,7 +151,7 @@ public class K1JFrame extends JFrame implements ActionListener {
 
    public void finalPage() {
        buttonEast2.setText("End");
-       jTextFieldNorth.setText("");
+       jTextAreaNorth.setText("");
        jTextFieldSouth.setText("");
        jTextAreaWest.setText("The test is finished");
        jTextFieldSouth.removeActionListener(this);
@@ -174,7 +174,6 @@ public class K1JFrame extends JFrame implements ActionListener {
     //public void play(String file) throws LineUnavailableException, UnsupportedAudioFileException, IOException
     public void play(String file) 
     {
-
     try 
         {   
             AudioInputStream inputStream = AudioSystem.getAudioInputStream(this.getClass().getResource(file));

@@ -50,7 +50,7 @@ public class K1Iterator {
 
     // To be used to obtain a boolean with the outcome of the supplied answer. 
     public boolean checkAnswer(String givenAnswer) {
-       if (givenAnswer.equals(answer)) 
+       if (answer.matches(givenAnswer+"\\s*"))
            return true;
        else
            return false;

@@ -21,6 +21,7 @@ public class K1StatsWriter {
        totQuestions = numQuestions;
        fileName = getStatsFileName(myFileName);
        System.out.println(fileName);
+       setHighestScoresString();
    } 
 
    void add(boolean result) {
@@ -52,7 +53,6 @@ public class K1StatsWriter {
    }
 
    String printTotalString() {
-       setHighestScoresString();
        return "Right Answers " + rightAnswers + " \nWrong Answers " + wrongAnswers + 
            " \nAnswers Left " + (totQuestions-rightAnswers-wrongAnswers + " \nTotal Questions " + totQuestions + "\nElapsed Time "+String.format("%.3f",((double)(endTime-startTime))/1000000000)+" "+oldHighScoreString+highScoreString);
    }
@@ -75,7 +75,7 @@ public class K1StatsWriter {
       }
    }
 
-   // gets the last record from the stats File
+   // checks for new records
    public void highestScoreFromStatFile() {
        float sessionTime = ((float)(endTime-startTime))/1000000000; 
        File myFile = new File(fileName);
